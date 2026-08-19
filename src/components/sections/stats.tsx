@@ -41,7 +41,7 @@ export function Stats() {
 
   return (
     <section id="stats" className="relative mx-auto max-w-6xl overflow-visible px-6 py-32">
-      <Meteors number={14} className="inset-x-[-20vw] -top-40" />
+      <Meteors number={14} className="hidden md:block inset-x-[-20vw] -top-40" />
 
       <motion.div
         initial={{ opacity: 0, y: 24 }}

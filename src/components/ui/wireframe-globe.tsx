@@ -34,6 +34,7 @@ function RotatingEarth({
   }, []);
 
   useEffect(() => {
+    const scaleFactor = window.innerWidth < 768 ? 0.7 : 1;
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -49,7 +50,7 @@ function RotatingEarth({
     const geoOrthographic = d3
       .geoOrthographic()
       .translate([width / 2, height / 2])
-      .scale(width / 2 - 5)
+      .scale((width / 2 - 5) * scaleFactor)
       .clipAngle(90);
 
     const geoPath = d3.geoPath(geoOrthographic, ctx);
@@ -89,7 +90,7 @@ function RotatingEarth({
       ctx.fill();
 
       ctx.beginPath();
-      ctx.arc(width / 2, height / 2, width / 2 - 2, 0, 2 * Math.PI);
+      ctx.arc(width / 2, height / 2, (width / 2 - 2) * scaleFactor, 0, 2 * Math.PI);
       ctx.strokeStyle = "rgba(255,255,255,0.25)";
       ctx.lineWidth = 1.5;
       ctx.stroke();
@@ -119,7 +120,12 @@ function RotatingEarth({
   };
 
   return (
-    <div ref={globeRef} onMouseMove={handleMouseMove}>
+    <div
+      ref={globeRef}
+      onMouseMove={handleMouseMove}
+      className="flex w-full items-center justify-center"
+      style={{ width: "100%", maxWidth: "450px", aspectRatio: "1/1" }}
+    >
       <canvas ref={canvasRef} className="mx-auto" style={{ width, height }} />
     </div>
   );
@@ -139,7 +145,7 @@ export function WireframeDottedGlobe({
 
     const update = () => {
       const w = el.getBoundingClientRect().width;
-      setSize(Math.max(280, Math.min(Math.round(w), 700)));
+      setSize(Math.max(0, Math.min(Math.round(w), 450)));
     };
 
     const ro = new ResizeObserver(update);
@@ -148,7 +154,7 @@ export function WireframeDottedGlobe({
   }, []);
 
   return (
-    <div ref={containerRef} className="w-full max-w-[700px]">
+    <div ref={containerRef} className="flex w-full items-center justify-center">
       <RotatingEarth width={size} height={size} globeRef={globeRef} />
     </div>
   );

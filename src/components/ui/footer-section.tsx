@@ -74,7 +74,7 @@ const FOOTER_LINKS: FooterColumn[] = [
 export function Footer() {
   return (
     <footer className="md:rounded-t-6xl relative w-full max-w-6xl mx-auto flex flex-col items-center justify-center rounded-t-4xl border-t bg-[radial-gradient(35%_128px_at_50%_0%,rgba(255,255,255,0.08),transparent)] px-6 py-12 lg:py-16">
-      <Meteors number={10} />
+      <Meteors number={10} className="hidden md:block" />
       <div className="bg-foreground/20 absolute top-0 right-1/2 left-1/2 h-px w-1/3 -translate-x-1/2 -translate-y-1/2 rounded-full blur" />
 
       <div className="grid w-full gap-8 xl:grid-cols-3 xl:gap-8">

@@ -125,7 +125,7 @@ export function Hero() {
                     <span className="mx-3 text-neutral-900">/</span>
                     {`0${FRAMES - 1}`}
                   </span>
-                  <div className="px-4 text-center font-mono text-[15vw] font-bold uppercase leading-none tracking-tight text-white md:text-[10rem] lg:text-[13rem]">
+                  <div className="px-4 text-center font-mono text-[15vw] font-bold uppercase leading-none tracking-tight text-white md:text-[8rem] lg:text-[11rem]">
                     {word}
                   </div>
                   <span className="mt-6 font-mono text-[10px] uppercase tracking-[0.5em] text-neutral-700">

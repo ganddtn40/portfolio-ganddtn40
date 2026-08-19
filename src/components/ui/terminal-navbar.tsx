@@ -14,7 +14,7 @@ const AnimatedNavLink = ({
   children: string;
 }) => {
   return (
-    <a href={href} className="flex h-5 items-center text-sm">
+    <a href={href} className="flex h-5 items-center px-2 py-1 text-xs sm:text-sm">
       <TextRoll
         className="text-neutral-400 [&>div:first-child]:text-neutral-400 [&>div:last-child]:text-white"
       >
@@ -103,18 +103,18 @@ export function TerminalNavbar() {
     <header
       className={`fixed top-6 left-1/2 transform -translate-x-1/2 z-40
                  flex flex-col items-center
-                 pl-4 pr-4 py-3
+                 px-3 py-3 sm:px-6
                  ${headerShapeClass}
                  border border-neutral-800 bg-neutral-950
-                 w-[calc(100%-2rem)] sm:w-auto
+                 w-[calc(100%-1.5rem)] max-w-full box-border
                  transition-[border-radius] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]`}
     >
-      <div className="flex items-center justify-between w-full gap-x-5 sm:gap-x-8">
+      <div className="flex items-center justify-between gap-2 w-full sm:gap-4">
         <a
           href={SITE.github}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2.5 group"
+          className="flex min-w-0 items-center gap-2.5 group"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -122,9 +122,11 @@ export function TerminalNavbar() {
             alt={SITE.name}
             width={28}
             height={28}
-            className="h-7 w-7 rounded-full border border-neutral-700 object-cover grayscale transition-all duration-500 group-hover:grayscale-0"
+            className="h-7 w-7 shrink-0 rounded-full border border-neutral-700 object-cover grayscale transition-all duration-500 group-hover:grayscale-0"
           />
-          <span className="font-mono text-sm text-white">{SITE.name}</span>
+          <span className="max-w-[120px] truncate font-mono text-xs text-white sm:max-w-none sm:text-sm">
+            {SITE.name}
+          </span>
         </a>
 
         <nav className="hidden sm:flex items-center space-x-4 sm:space-x-6 text-sm">
@@ -140,7 +142,7 @@ export function TerminalNavbar() {
         </div>
 
         <button
-          className="sm:hidden flex items-center justify-center w-8 h-8 text-neutral-300 focus:outline-none"
+          className="sm:hidden flex items-center justify-center w-8 h-8 shrink-0 ml-auto text-neutral-300 focus:outline-none"
           onClick={toggleMenu}
           aria-label={isOpen ? "Close Menu" : "Open Menu"}
         >
