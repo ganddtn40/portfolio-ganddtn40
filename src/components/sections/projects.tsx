@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { Code, ExternalLink } from "lucide-react";
 import { BorderBeam } from "@/components/ui/border-beam";
 import { ContainerScroll } from "@/components/ui/container-scroll";
+import { ErrorBoundary } from "@/components/ui/error-boundary";
 import { GlitchText } from "@/components/ui/glitch-text";
 import { HackerText } from "@/components/ui/hacker-text";
 import { Magnetic } from "@/components/ui/magnetic";
@@ -78,7 +79,9 @@ export function Projects() {
 
       <div className="relative z-10">
         <div className="relative">
-          <Lamp className="absolute -top-32 left-1/2 w-[140vw] max-w-none -translate-x-1/2" />
+          <ErrorBoundary>
+            <Lamp className="absolute -top-32 left-1/2 w-[140vw] max-w-none -translate-x-1/2" />
+          </ErrorBoundary>
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -164,17 +167,11 @@ export function Projects() {
       </div>
 
       <div className="relative z-10">
-        <ContainerScroll
-          titleComponent={
-            <div className="px-6 text-left">
-              <p className="font-mono text-xs uppercase tracking-[0.3em] text-neutral-600">
-                scroll for the artifact
-              </p>
-            </div>
-          }
-        >
-          <MockupScreen />
-        </ContainerScroll>
+        <ErrorBoundary>
+          <ContainerScroll titleComponent={<></>}>
+            <MockupScreen />
+          </ContainerScroll>
+        </ErrorBoundary>
       </div>
     </section>
   );

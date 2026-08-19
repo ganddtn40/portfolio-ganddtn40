@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { GlitchText } from "@/components/ui/glitch-text";
+import { ErrorBoundary } from "@/components/ui/error-boundary";
 import { Meteors } from "@/components/ui/meteors";
 import { WobbleCard } from "@/components/ui/wobble-card";
 import { useLoaderDone } from "@/components/ui/loader-provider";
@@ -30,7 +31,11 @@ function ParallaxGif({ children }: { children: React.ReactNode }) {
   const y = useTransform(scrollYProgress, [0, 1], [60, -60]);
 
   return (
-    <motion.div ref={ref} style={{ y }} className="relative">
+    <motion.div
+      ref={ref}
+      style={{ y }}
+      className="relative [transform:translate3d(0,0,0)] [will-change:transform]"
+    >
       {children}
     </motion.div>
   );
@@ -66,15 +71,22 @@ export function Stats() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-10%" }}
         transition={{ duration: 0.9, ease: EASE }}
-        className="mt-16 flex flex-col items-center gap-16"
+        className="mt-16 grid grid-cols-1 items-start gap-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,260px)]"
       >
-        <div className="w-full max-w-[100vw] overflow-x-auto pb-4 scrollbar-thin">
+        <div
+          className={`w-full max-w-[100vw] overflow-x-auto pb-4 transition-opacity duration-700 scrollbar-thin ${
+            isLoaderDone ? "opacity-100" : "pointer-events-none opacity-0"
+          }`}
+          aria-hidden={!isLoaderDone}
+        >
           <div className="min-w-max">
-            {isLoaderDone && <GithubCalendar username={SITE.name} />}
+            <ErrorBoundary>
+              <GithubCalendar username={SITE.name} />
+            </ErrorBoundary>
           </div>
         </div>
 
-        <div className="relative mx-auto block w-full max-w-[240px]">
+        <div className="relative mx-auto block w-full max-w-[240px] lg:mx-0">
           <ParallaxGif>
             <WobbleCard className="w-full max-w-[240px]">
               <div className="relative h-[320px] min-h-[250px] w-full">

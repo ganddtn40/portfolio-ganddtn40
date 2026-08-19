@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { IconCloud } from "@/components/ui/interactive-icon-cloud";
+import { ErrorBoundary } from "@/components/ui/error-boundary";
 import { HackerText } from "@/components/ui/hacker-text";
 import { HyperText } from "@/components/ui/hyper-text";
 import { EASE } from "@/lib/easing";
@@ -79,9 +80,11 @@ export function Technologies() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-10%" }}
           transition={{ duration: 0.9, delay: 0.1, ease: EASE }}
-          className="relative min-h-[420px] w-full overflow-hidden border-none bg-transparent shadow-none outline-none"
+          className="relative min-h-[420px] w-full overflow-hidden border-none bg-transparent shadow-none outline-none [transform:translate3d(0,0,0)] [will-change:transform]"
         >
-          <IconCloud iconSlugs={ICON_SLUGS} />
+          <ErrorBoundary>
+            <IconCloud iconSlugs={ICON_SLUGS} />
+          </ErrorBoundary>
         </motion.div>
       </div>
     </section>

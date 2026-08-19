@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, lazy, useRef } from "react";
+import { Suspense, lazy, useEffect, useRef } from "react";
 import {
   motion,
   useMotionValue,
@@ -22,14 +22,26 @@ export function SplineScene({ scene, className }: SplineSceneProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mx = useMotionValue(0.5);
   const my = useMotionValue(0.5);
-  const rotateY = useSpring(useTransform(mx, [0, 1], [12, -12]), {
-    stiffness: 60,
-    damping: 16,
+  const rotateY = useSpring(useTransform(mx, [0, 1], [86, -86]), {
+    stiffness: 160,
+    damping: 18,
+    mass: 0.5,
   });
-  const rotateX = useSpring(useTransform(my, [0, 1], [-9, 9]), {
-    stiffness: 60,
-    damping: 16,
+  const rotateX = useSpring(useTransform(my, [0, 1], [40, -40]), {
+    stiffness: 160,
+    damping: 18,
+    mass: 0.5,
   });
+
+  useEffect(() => {
+    if (isMobile) return;
+    const onMove = (e: MouseEvent) => {
+      mx.set(e.clientX / window.innerWidth);
+      my.set(e.clientY / window.innerHeight);
+    };
+    window.addEventListener("mousemove", onMove, { passive: true });
+    return () => window.removeEventListener("mousemove", onMove);
+  }, [isMobile, mx, my]);
 
   if (isMobile) {
     return (
@@ -59,17 +71,7 @@ export function SplineScene({ scene, className }: SplineSceneProps) {
       >
         <div
           ref={containerRef}
-          className="h-full w-full [perspective:900px]"
-          onMouseMove={(e) => {
-            const rect = containerRef.current?.getBoundingClientRect();
-            if (!rect) return;
-            mx.set((e.clientX - rect.left) / rect.width);
-            my.set((e.clientY - rect.top) / rect.height);
-          }}
-          onMouseLeave={() => {
-            mx.set(0.5);
-            my.set(0.5);
-          }}
+          className="h-full w-full [perspective:900px] [transform:translate3d(0,0,0)] [will-change:transform]"
         >
           <motion.div
             style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}

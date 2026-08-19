@@ -7,6 +7,7 @@ import type { MotionValue } from "framer-motion";
 import { useRef } from "react";
 import { ChevronDown } from "lucide-react";
 import { SiGithub, SiInstagram, SiTiktok } from "react-icons/si";
+import { ErrorBoundary } from "@/components/ui/error-boundary";
 import { Magnetic } from "@/components/ui/magnetic";
 import { MorphText } from "@/components/ui/morph-text";
 import { Spotlight } from "@/components/ui/spotlight";
@@ -84,10 +85,16 @@ export function Hero() {
   return (
     <section className="relative">
       <div className="absolute inset-0 z-0">
-        <BackgroundPaths />
-        <div className="absolute inset-0">
-          {!isMobile && <Sparkles density={100} />}
-        </div>
+        <ErrorBoundary>
+          <BackgroundPaths />
+          <div className="absolute inset-0">
+            {!isMobile && (
+              <ErrorBoundary>
+                <Sparkles density={100} />
+              </ErrorBoundary>
+            )}
+          </div>
+        </ErrorBoundary>
       </div>
 
       <div className="relative z-10">
@@ -95,9 +102,9 @@ export function Hero() {
           ref={headlineRef}
           className="mx-auto h-[140vh] w-full max-w-6xl px-4 md:h-[180vh] md:px-8"
         >
-          <div className="sticky top-24 mt-16 flex items-start justify-center md:top-1/3 md:mt-24 md:items-center">
+          <div className="sticky top-24 mt-16 flex items-start justify-center [transform:translate3d(0,0,0)] [will-change:transform] md:top-1/3 md:mt-24 md:items-center">
             <motion.h1
-              className="flex flex-wrap justify-center text-center font-mono text-2xl font-black uppercase leading-none tracking-tight text-white sm:text-4xl md:text-6xl lg:text-7xl"
+              className="flex flex-wrap justify-center text-center font-gothic text-2xl font-black uppercase leading-none text-white -tracking-widest drop-shadow-[0_10px_10px_rgba(255,255,255,0.2)] sm:text-4xl md:text-6xl lg:text-7xl"
             >
               {WORDS.map((word, i) => (
                 <HeroWord
@@ -163,16 +170,19 @@ export function Hero() {
               </Magnetic>
             ))}
           </div>
-          {isLoaderDone && (
-            <div className="pointer-events-none mt-10 flex w-full justify-center">
-              <div className="h-[28vh] min-h-[220px] w-full max-w-lg opacity-70 md:h-[36vh]">
-                <SplineScene
-                  scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-                  className="h-full w-full"
-                />
-              </div>
+          <div
+            className={`pointer-events-none mt-10 flex w-full justify-center transition-opacity duration-700 [transform:translate3d(0,0,0)] [will-change:transform,opacity] ${
+              isLoaderDone ? "opacity-100" : "pointer-events-none opacity-0"
+            }`}
+            aria-hidden={!isLoaderDone}
+          >
+            <div className="h-[28vh] min-h-[220px] w-full max-w-lg opacity-70 md:h-[36vh]">
+              <SplineScene
+                scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+                className="h-full w-full"
+              />
             </div>
-          )}
+          </div>
           <Spotlight className="z-20" size={520} opacity={0.09} />
         </motion.div>
       </div>

@@ -41,7 +41,10 @@ function RotatingEarth({
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    const dpr = Math.min(
+      window.devicePixelRatio || 1,
+      window.innerWidth < 768 ? 1 : 1.5,
+    );
     canvas.width = width * dpr;
     canvas.height = height * dpr;
     ctx.scale(dpr, dpr);
@@ -63,8 +66,14 @@ function RotatingEarth({
 
     let last = performance.now();
 
+    let visible = true;
+    const io = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+    });
+    io.observe(canvas);
+
     const draw = () => {
-      if (document.hidden) return;
+      if (document.hidden || !visible) return;
 
       const now = performance.now();
       if (!reducedMotionRef.current) {
@@ -106,7 +115,10 @@ function RotatingEarth({
     };
 
     const intervalId = setInterval(draw, 33);
-    return () => clearInterval(intervalId);
+    return () => {
+      clearInterval(intervalId);
+      io.disconnect();
+    };
   }, [width, height]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {

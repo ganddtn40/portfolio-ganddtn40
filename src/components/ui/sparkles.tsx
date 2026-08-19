@@ -19,7 +19,11 @@ export function Sparkles({ className, density = 110 }: SparklesProps) {
     const parent = canvas.parentElement;
     if (!parent) return;
 
-    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    const dpr = Math.min(
+      window.devicePixelRatio || 1,
+      window.innerWidth < 768 ? 1 : 1.5,
+    );
+    const mobile = window.innerWidth < 768;
     let w = 0;
     let h = 0;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -35,7 +39,10 @@ export function Sparkles({ className, density = 110 }: SparklesProps) {
     const ro = new ResizeObserver(resize);
     ro.observe(parent);
 
-    const count = Math.max(24, Math.min(density, Math.floor((w * h) / 9000)));
+    const count = Math.max(
+      mobile ? 14 : 24,
+      Math.min(density, Math.floor((w * h) / (mobile ? 18000 : 9000))),
+    );
     const particles = Array.from({ length: count }, () => ({
       x: Math.random() * w,
       y: Math.random() * h,
@@ -47,7 +54,15 @@ export function Sparkles({ className, density = 110 }: SparklesProps) {
     }));
 
     let raf = 0;
-    const draw = () => {
+    let running = true;
+    let last = 0;
+    const draw = (t: number) => {
+      if (!running) return;
+      if (t - last < 16) {
+        raf = requestAnimationFrame(draw);
+        return;
+      }
+      last = t;
       ctx.clearRect(0, 0, w, h);
       for (const p of particles) {
         if (!reduced) {
@@ -73,8 +88,18 @@ export function Sparkles({ className, density = 110 }: SparklesProps) {
     };
     raf = requestAnimationFrame(draw);
 
+    const io = new IntersectionObserver(([entry]) => {
+      const next = entry.isIntersecting;
+      if (next === running) return;
+      running = next;
+      cancelAnimationFrame(raf);
+      if (running) raf = requestAnimationFrame(draw);
+    });
+    io.observe(canvas);
+
     return () => {
       cancelAnimationFrame(raf);
+      io.disconnect();
       ro.disconnect();
     };
   }, [density]);

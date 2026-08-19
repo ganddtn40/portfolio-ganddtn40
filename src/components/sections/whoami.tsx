@@ -103,13 +103,13 @@ export function Whoami() {
         </div>
       </motion.div>
 
-      <div className="mt-16 flex flex-col items-center gap-16">
+      <div className="mt-16 grid grid-cols-1 items-start gap-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,440px)]">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-10%" }}
           transition={{ duration: 0.9, ease: EASE }}
-          className="w-full max-w-2xl"
+          className="w-full"
         >
           <div className="inline-block border-2 border-white/25 p-2">
             <Image
@@ -141,23 +141,25 @@ export function Whoami() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: "-10%" }}
           transition={{ duration: 1, ease: EASE }}
-          className="relative flex w-full justify-center"
+          className="w-full"
         >
-          <ParallaxGif>
-            <WobbleCard className="w-full max-w-md">
-              <div className="relative h-[300px] min-h-[250px] w-full md:h-[420px]">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/gothic-cross.gif"
-                  alt="Cross"
-                  width={420}
-                  height={420}
-                  loading="lazy"
-                  className="h-full w-full object-contain"
-                />
-              </div>
-            </WobbleCard>
-          </ParallaxGif>
+          <div className="mx-auto w-full max-w-md lg:mx-0">
+            <ParallaxGif>
+              <WobbleCard className="w-full max-w-md">
+                <div className="relative h-[300px] min-h-[250px] w-full md:h-[420px]">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/gothic-cross.gif"
+                    alt="Cross"
+                    width={420}
+                    height={420}
+                    loading="lazy"
+                    className="h-full w-full object-contain"
+                  />
+                </div>
+              </WobbleCard>
+            </ParallaxGif>
+          </div>
         </motion.div>
       </div>
 
