@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { m } from "framer-motion";
 import { IconCloud } from "@/components/ui/interactive-icon-cloud";
@@ -41,12 +41,12 @@ export function Technologies() {
         <div className="flex items-baseline justify-between gap-6">
           <h2 className="min-w-0">
             <HyperText
-              text="01 â€” STACK"
+              text="01 — STACK"
               className="text-3xl font-bold uppercase tracking-tight text-white md:text-5xl"
             />
           </h2>
           <span className="hidden shrink-0 font-mono text-xs text-neutral-600 sm:block">
-            <HackerText text="step_01 â€” the arsenal" />
+            <HackerText text="step_01 — the arsenal" />
           </span>
         </div>
       </m.div>

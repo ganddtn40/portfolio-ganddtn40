@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useRef } from "react";
 import { m, useScroll, useTransform } from "framer-motion";
@@ -51,7 +51,7 @@ function MacTerminal() {
         <span className="h-3 w-3 rounded-full bg-yellow-500" />
         <span className="h-3 w-3 rounded-full bg-green-500" />
         <span className="ml-3 truncate text-xs text-neutral-500">
-          {SITE.name} â€” zsh â€” portfolio
+          {SITE.name} — zsh — portfolio
         </span>
       </div>
       <div className="px-5 py-5">
@@ -95,7 +95,7 @@ export function Whoami() {
       >
         <div className="flex items-baseline justify-between gap-6">
           <h2 className="font-mono text-3xl font-bold uppercase tracking-tight text-white md:text-5xl">
-            <GlitchText text="00 â€” whoami" />
+            <GlitchText text="00 — whoami" />
           </h2>
           <span className="hidden font-mono text-xs text-neutral-600 sm:block">
             {SITE.name}
@@ -128,7 +128,7 @@ export function Whoami() {
             <br />
             <br />
             {SITE.role} from {SITE.origin}. TypeScript, SQL, PHP, Dart, HTML5,
-            CSS3, JS â€” and nothing else. Recently shipped{" "}
+            CSS3, JS — and nothing else. Recently shipped{" "}
             <span className="text-white">{SITE.project}</span>, a static
             landing site for a tea & coffee cafe.
           </p>

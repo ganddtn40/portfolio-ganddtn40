@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import dynamic from "next/dynamic";
 import Image from "next/image";
@@ -47,7 +47,7 @@ const ROLES = [
   "Backend Engineer",
 ];
 
-function HeroWord({
+function ScrollWord({
   progress,
   index,
   total,
@@ -64,9 +64,33 @@ function HeroWord({
   const y = useTransform(progress, [start, end], [-30, 0]);
 
   return (
-    <m.span style={{ opacity, y }} className="inline-block leading-none">
-      {word}
-    </m.span>
+    <span
+      className="inline-block leading-none"
+      style={{ willChange: "opacity, transform", WebkitTransform: "translateZ(0)" }}
+    >
+      <m.span style={{ opacity, y }} className="inline-block leading-none">
+        {word}
+      </m.span>
+    </span>
+  );
+}
+
+function ViewWord({ word, index }: { word: string; index: number }) {
+  return (
+    <span
+      className="inline-block leading-none"
+      style={{ willChange: "opacity, transform", WebkitTransform: "translateZ(0)" }}
+    >
+      <m.span
+        initial={{ opacity: 0.1, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ amount: 0.4 }}
+        transition={{ delay: index * 0.08, duration: 0.5, ease: "easeOut" }}
+        className="inline-block leading-none"
+      >
+        {word}
+      </m.span>
+    </span>
   );
 }
 
@@ -97,21 +121,25 @@ export function Hero() {
       <div className="relative z-10">
         <div
           ref={headlineRef}
-          className="mx-auto h-[140vh] w-full max-w-6xl px-4 md:h-[180vh] md:px-8"
+          className="mx-auto h-[120vh] w-full max-w-6xl px-4 md:h-[200vh] md:px-8"
         >
-          <div className="sticky top-24 mt-16 flex items-start justify-center [transform:translate3d(0,0,0)] [will-change:transform] md:top-1/3 md:mt-24 md:items-center">
+          <div className="sticky top-24 relative z-50 mt-16 flex items-start justify-center [transform:translate3d(0,0,0)] [will-change:transform] md:top-1/3 md:mt-24 md:items-center">
             <m.h1
               className="flex flex-col items-center text-center font-gothic text-2xl font-black uppercase leading-none text-white -tracking-widest drop-shadow-[0_10px_10px_rgba(255,255,255,0.2)] sm:text-4xl md:text-6xl lg:text-7xl"
             >
-              {WORDS.map((word, i) => (
-                <HeroWord
-                  key={word}
-                  progress={scrollYProgress}
-                  index={i}
-                  total={WORDS.length}
-                  word={word}
-                />
-              ))}
+              {WORDS.map((word, i) =>
+                isMobile ? (
+                  <ViewWord key={word} word={word} index={i} />
+                ) : (
+                  <ScrollWord
+                    key={word}
+                    progress={scrollYProgress}
+                    index={i}
+                    total={WORDS.length}
+                    word={word}
+                  />
+                ),
+              )}
             </m.h1>
           </div>
           <p className="pointer-events-none absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3">
@@ -147,7 +175,7 @@ export function Hero() {
               <Typewriter text="$ cat profile.md" speed={55} />
             </span>
             <br />
-            {SITE.role} â€” reliable, fast web systems from SQL schemas to
+            {SITE.role} — reliable, fast web systems from SQL schemas to
             pixels.
           </p>
           <div className="mt-8 flex items-center gap-8">

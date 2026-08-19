@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { m } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -94,7 +94,7 @@ export function Networking() {
           <div className="flex items-baseline justify-between gap-6">
             <h2 className="min-w-0">
               <HyperText
-                text="03 â€” NETWORK"
+                text="03 — NETWORK"
                 className="text-3xl font-bold uppercase tracking-tight text-white md:text-5xl"
               />
             </h2>
@@ -111,7 +111,7 @@ export function Networking() {
           transition={{ duration: 0.8, ease: EASE }}
           className="mt-8 max-w-lg font-mono text-sm leading-relaxed text-neutral-500 md:text-base"
         >
-          The world, wired. Every request travels along the white beams â€” from
+          The world, wired. Every request travels along the white beams — from
           the gateway through the queue to the tomb of data. Move your mouse to
           tilt the globe.
         </m.p>

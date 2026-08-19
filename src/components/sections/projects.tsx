@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import dynamic from "next/dynamic";
 import { useState } from "react";
@@ -91,7 +91,7 @@ export function Projects() {
           >
             <div className="flex items-baseline justify-between gap-6">
               <h2 className="font-mono text-3xl font-bold uppercase tracking-tight text-white md:text-5xl">
-                <GlitchText text="02 â€” projects" />
+                <GlitchText text="02 — projects" />
               </h2>
               <span className="hidden shrink-0 font-mono text-xs text-neutral-600 sm:block">
                 one at a time
