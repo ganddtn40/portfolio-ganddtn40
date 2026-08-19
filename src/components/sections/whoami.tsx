@@ -26,7 +26,11 @@ function ParallaxGif({ children }: { children: React.ReactNode }) {
   const y = useTransform(scrollYProgress, [0, 1], [70, -70]);
 
   return (
-    <motion.div ref={ref} style={{ y }} className="relative">
+    <motion.div
+      ref={ref}
+      style={{ y }}
+      className="relative [transform:translateZ(0)] [will-change:transform]"
+    >
       {children}
     </motion.div>
   );

@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { WireframeDottedGlobe } from "@/components/ui/wireframe-globe";
 import { AnimatedBeam } from "@/components/ui/animated-beam";
+import { ErrorBoundary } from "@/components/ui/error-boundary";
 import { HyperText } from "@/components/ui/hyper-text";
 import { useLoaderDone } from "@/components/ui/loader-provider";
 import { EASE } from "@/lib/easing";
@@ -130,8 +131,12 @@ export function Networking() {
           <div className="gothic-grid absolute inset-0 z-0 opacity-60" />
 
           <div className="absolute inset-0 z-[1] flex w-full max-w-full items-center justify-center overflow-hidden px-2 py-6">
-            <div className="mx-auto flex aspect-square w-full max-w-[320px] items-center justify-center overflow-hidden sm:max-w-[480px] md:max-w-[600px]">
-              {isLoaderDone && <WireframeDottedGlobe globeRef={globeRef} />}
+            <div className="mx-auto flex aspect-square w-full max-w-[320px] items-center justify-center overflow-hidden [transform:translateZ(0)] [will-change:transform] sm:max-w-[480px] md:max-w-[600px]">
+              {isLoaderDone && (
+                <ErrorBoundary>
+                  <WireframeDottedGlobe globeRef={globeRef} />
+                </ErrorBoundary>
+              )}
             </div>
           </div>
 

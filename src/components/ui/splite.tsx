@@ -8,6 +8,7 @@ import {
   useTransform,
 } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { ErrorBoundary } from "@/components/ui/error-boundary";
 
 const Spline = lazy(() => import("@splinetool/react-spline"));
 
@@ -46,36 +47,38 @@ export function SplineScene({ scene, className }: SplineSceneProps) {
   }
 
   return (
-    <Suspense
-      fallback={
-        <div className="flex h-full w-full items-center justify-center">
-          <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-neutral-600 animate-blink">
-            loading scene_
-          </span>
-        </div>
-      }
-    >
-      <div
-        ref={containerRef}
-        className="h-full w-full [perspective:900px]"
-        onMouseMove={(e) => {
-          const rect = containerRef.current?.getBoundingClientRect();
-          if (!rect) return;
-          mx.set((e.clientX - rect.left) / rect.width);
-          my.set((e.clientY - rect.top) / rect.height);
-        }}
-        onMouseLeave={() => {
-          mx.set(0.5);
-          my.set(0.5);
-        }}
+    <ErrorBoundary>
+      <Suspense
+        fallback={
+          <div className="flex h-full w-full items-center justify-center">
+            <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-neutral-600 animate-blink">
+              loading scene_
+            </span>
+          </div>
+        }
       >
-        <motion.div
-          style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-          className="h-full w-full grayscale contrast-125"
+        <div
+          ref={containerRef}
+          className="h-full w-full [perspective:900px]"
+          onMouseMove={(e) => {
+            const rect = containerRef.current?.getBoundingClientRect();
+            if (!rect) return;
+            mx.set((e.clientX - rect.left) / rect.width);
+            my.set((e.clientY - rect.top) / rect.height);
+          }}
+          onMouseLeave={() => {
+            mx.set(0.5);
+            my.set(0.5);
+          }}
         >
-          <Spline scene={scene} className={className} renderOnDemand />
-        </motion.div>
-      </div>
-    </Suspense>
+          <motion.div
+            style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+            className="h-full w-full grayscale contrast-125"
+          >
+            <Spline scene={scene} className={className} renderOnDemand />
+          </motion.div>
+        </div>
+      </Suspense>
+    </ErrorBoundary>
   );
 }

@@ -35,7 +35,7 @@ const SOCIALS = [
   { href: "https://www.tiktok.com/", icon: SiTiktok, label: "TikTok" },
 ];
 
-const WORDS = ["FULL", "STACK", "WEB", "DEVELOPER", "IN THE", "WORLD"];
+const WORDS = "FULL STACK WEB DEVELOPER IN THE WORLD".split(" ");
 
 const ROLES = [
   "Full Stack Web Developer",
@@ -44,9 +44,23 @@ const ROLES = [
   "Backend Engineer",
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.12, delayChildren: 0.1 },
+  },
+};
+
+const REVEAL_EASE: [number, number, number, number] = [0.2, 0.65, 0.3, 0.9];
+
 const wordVariants = {
-  hidden: { opacity: 0, y: 30 },
-  show: { opacity: 1, y: 0 },
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: REVEAL_EASE },
+  },
 };
 
 export function Hero() {
@@ -62,23 +76,19 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="relative z-10 flex min-h-screen w-full flex-col items-center justify-center">
+      <div className="relative z-10 flex min-h-screen w-full flex-col items-center justify-center [transform:translateZ(0)] [will-change:transform,opacity]">
         <div className="mx-auto w-full max-w-6xl px-4 py-8 overflow-hidden">
           <motion.h1
             initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={{
-              hidden: {},
-              show: { transition: { staggerChildren: 0.08 } },
-            }}
-            className="glitch-in flex flex-wrap justify-center text-center font-mono text-3xl font-black uppercase tracking-tight text-white sm:text-5xl md:text-7xl lg:text-8xl"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={containerVariants}
+            className="flex flex-wrap justify-center text-center font-mono text-3xl font-black uppercase leading-none tracking-tight text-white sm:text-5xl md:text-7xl lg:text-8xl"
           >
             {WORDS.map((word) => (
               <motion.span
                 key={word}
                 variants={wordVariants}
-                transition={{ duration: 0.6, ease: "easeOut" }}
                 className="inline-block whitespace-nowrap px-2"
               >
                 {word}
