@@ -12,6 +12,7 @@ import { MorphText } from "@/components/ui/morph-text";
 import { Spotlight } from "@/components/ui/spotlight";
 import { Typewriter } from "@/components/ui/typewriter";
 import { useLoaderDone } from "@/components/ui/loader-provider";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { SITE } from "@/lib/site";
 
 const BackgroundPaths = dynamic(
@@ -83,6 +84,7 @@ function WordLayer({
 export function Hero() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const isLoaderDone = useLoaderDone();
+  const isMobile = useIsMobile();
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end end"],
@@ -107,7 +109,7 @@ export function Hero() {
         <BackgroundPaths>
           <div className="relative h-screen w-full">
             <div className="absolute inset-0">
-              <Sparkles density={100} />
+              {!isMobile && <Sparkles density={100} />}
             </div>
 
             {WORDS.map((word, i) => (

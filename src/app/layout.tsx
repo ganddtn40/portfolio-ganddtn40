@@ -4,7 +4,6 @@ import { CursorLayer } from "@/components/ui/cursor-layer";
 import { DotPatternLayer } from "@/components/ui/dot-pattern-layer";
 import { LoaderProvider } from "@/components/ui/loader-provider";
 import { SmoothScrollProvider } from "@/components/ui/smooth-scroll";
-import { SITE } from "@/lib/site";
 import "./globals.css";
 
 const inter = Inter({
@@ -27,10 +26,11 @@ const cormorant = Cormorant_Garamond({
 });
 
 const siteDescription =
-  "Portfolio of ganddtn40, a Full Stack Web Developer from Indonesia specializing in TypeScript, Next.js, PHP, SQL, and Dart. Terminal-first, gothic aesthetic.";
+  "Lyhsjaa Portfolio - Full Stack Web Developer dari Indonesia spesialis TypeScript, Next.js, PHP, SQL, dan Dart.";
 
 export const metadata: Metadata = {
-  title: "ganddtn40 | Full Stack Web Developer",
+  metadataBase: new URL("https://portfolio-lyh.vercel.app"),
+  title: "Lyhsjaa Portfolio | Full Stack Web Developer",
   description: siteDescription,
   keywords: [
     "Full Stack Developer",
@@ -40,6 +40,9 @@ export const metadata: Metadata = {
     "lyhsjaa",
     "Indonesia Developer",
   ],
+  alternates: {
+    canonical: "https://portfolio-lyh.vercel.app",
+  },
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -54,17 +57,18 @@ export const metadata: Metadata = {
   manifest: "/site.webmanifest",
   themeColor: "#000000",
   openGraph: {
-    title: "ganddtn40 | Full Stack Web Developer",
+    title: "Lyhsjaa Portfolio | Full Stack Web Developer",
     description: siteDescription,
     type: "website",
     locale: "en_US",
-    images: [{ url: SITE.avatar }],
+    url: "https://portfolio-lyh.vercel.app",
+    images: [{ url: "https://portfolio-lyh.vercel.app/og-image.png" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "ganddtn40 | Full Stack Web Developer",
+    title: "Lyhsjaa Portfolio | Full Stack Web Developer",
     description: siteDescription,
-    images: [SITE.avatar],
+    images: ["https://portfolio-lyh.vercel.app/og-image.png"],
   },
 };
 
@@ -74,7 +78,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${inter.variable} ${jetbrainsMono.variable} ${cormorant.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-black text-white">
+      <body className="min-h-full flex flex-col bg-black text-white overflow-x-hidden">
         <DotPatternLayer />
         <CursorLayer />
         <LoaderProvider>

@@ -145,6 +145,9 @@ export function Whoami() {
                 <img
                   src="/gothic-cross.gif"
                   alt="Cross"
+                  width={420}
+                  height={420}
+                  loading="lazy"
                   className="h-full w-full object-contain"
                 />
               </div>

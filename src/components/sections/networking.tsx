@@ -6,6 +6,7 @@ import { WireframeDottedGlobe } from "@/components/ui/wireframe-globe";
 import { AnimatedBeam } from "@/components/ui/animated-beam";
 import { HyperText } from "@/components/ui/hyper-text";
 import { useLoaderDone } from "@/components/ui/loader-provider";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { EASE } from "@/lib/easing";
 
 const nodes = [
@@ -19,6 +20,7 @@ export function Networking() {
   const containerRef = useRef<HTMLDivElement>(null);
   const globeRef = useRef<HTMLDivElement | null>(null);
   const isLoaderDone = useLoaderDone();
+  const isMobile = useIsMobile();
   const [nodeEls, setNodeEls] = useState<Record<string, HTMLDivElement | null>>(
     {},
   );
@@ -130,7 +132,20 @@ export function Networking() {
           <div className="gothic-grid absolute inset-0 z-0 opacity-60" />
 
           <div className="absolute inset-0 z-[1] flex items-center justify-center px-6">
-            {isLoaderDone && <WireframeDottedGlobe globeRef={globeRef} />}
+            {isLoaderDone &&
+              (isMobile ? (
+                <div
+                  ref={globeRef}
+                  className="relative flex h-52 w-52 items-center justify-center rounded-full border border-neutral-800 bg-neutral-950/60 md:hidden"
+                >
+                  <div className="gothic-grid absolute inset-0 rounded-full opacity-40" />
+                  <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-neutral-600">
+                    world.wired
+                  </span>
+                </div>
+              ) : (
+                <WireframeDottedGlobe globeRef={globeRef} />
+              ))}
           </div>
 
           {nodes.map((n) => (

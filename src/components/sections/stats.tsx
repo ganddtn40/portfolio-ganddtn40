@@ -82,6 +82,9 @@ export function Stats() {
                 <img
                   src="/chain.gif"
                   alt="Chain"
+                  width={240}
+                  height={320}
+                  loading="lazy"
                   className="h-full w-full object-contain"
                 />
               </div>

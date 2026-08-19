@@ -5,7 +5,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import { SiGithub, SiInstagram, SiTiktok } from "react-icons/si";
 import { TextRoll } from "@/components/ui/animated-menu";
 import { SITE } from "@/lib/site";
-import { EASE } from "@/lib/easing";
 
 const AnimatedNavLink = ({
   href,
@@ -187,7 +186,7 @@ export function TerminalNavbar() {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.35, ease: EASE }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
           >
             <nav className="flex flex-col items-center space-y-4 text-base w-full pt-4">
               {navLinksData.map((link) => (

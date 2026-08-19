@@ -7,6 +7,7 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const Spline = lazy(() => import("@splinetool/react-spline"));
 
@@ -16,6 +17,7 @@ interface SplineSceneProps {
 }
 
 export function SplineScene({ scene, className }: SplineSceneProps) {
+  const isMobile = useIsMobile();
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mx = useMotionValue(0.5);
   const my = useMotionValue(0.5);
@@ -27,6 +29,21 @@ export function SplineScene({ scene, className }: SplineSceneProps) {
     stiffness: 60,
     damping: 16,
   });
+
+  if (isMobile) {
+    return (
+      <div
+        className={`${className ?? ""} flex h-full w-full items-center justify-center`}
+      >
+        <div className="flex flex-col items-center justify-center gap-4 text-neutral-700">
+          <span className="text-5xl">✝</span>
+          <span className="font-mono text-[10px] uppercase tracking-[0.35em]">
+            robot_offline
+          </span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <Suspense
@@ -56,7 +73,7 @@ export function SplineScene({ scene, className }: SplineSceneProps) {
           style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
           className="h-full w-full grayscale contrast-125"
         >
-          <Spline scene={scene} className={className} />
+          <Spline scene={scene} className={className} renderOnDemand />
         </motion.div>
       </div>
     </Suspense>

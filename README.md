@@ -1,10 +1,10 @@
-# GANDDTN40 - Full Stack Web Developer Portfolio
+# Portfolio Saya - Full Stack Web Developer
 
 A brutalist, gothic, and highly interactive terminal-style web portfolio built with Next.js, Tailwind CSS, Framer Motion, and GSAP.
 
 ## About
 
-Portfolio of ganddtn40 (lyhsjaa), a Full Stack Web Developer from Indonesia specializing in TypeScript, Next.js, PHP, SQL, and Dart. Terminal-first, gothic aesthetic — every section behaves like a session in a command line: `whoami`, `cat info.txt`, `./github_contributions.sh`, and a live "socialitea" project demo.
+Portfolio Saya - Full Stack Web Developer dari Indonesia, spesialis TypeScript, Next.js, PHP, SQL, dan Dart. Terminal-first, gothic aesthetic — every section behaves like a session in a command line: `whoami`, `cat info.txt`, `./github_contributions.sh`, and a live "socialitea" project demo.
 
 ## Tech Stack
 
