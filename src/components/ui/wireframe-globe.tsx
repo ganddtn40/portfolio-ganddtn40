@@ -34,7 +34,7 @@ function RotatingEarth({
   }, []);
 
   useEffect(() => {
-    const scaleFactor = window.innerWidth < 768 ? 0.55 : 1;
+    const scaleFactor = window.innerWidth < 768 ? 0.5 : 1;
     const canvas = canvasRef.current;
     if (!canvas) return;
 

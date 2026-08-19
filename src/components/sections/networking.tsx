@@ -130,7 +130,7 @@ export function Networking() {
           <div className="gothic-grid absolute inset-0 z-0 opacity-60" />
 
           <div className="absolute inset-0 z-[1] flex w-full max-w-full items-center justify-center overflow-hidden px-2 py-6">
-            <div className="mx-auto aspect-square w-full max-w-[320px] sm:max-w-[480px] md:max-w-[600px]">
+            <div className="mx-auto flex aspect-square w-full max-w-[320px] items-center justify-center overflow-hidden sm:max-w-[480px] md:max-w-[600px]">
               {isLoaderDone && <WireframeDottedGlobe globeRef={globeRef} />}
             </div>
           </div>
