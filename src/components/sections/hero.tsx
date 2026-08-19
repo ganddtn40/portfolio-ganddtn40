@@ -2,7 +2,9 @@
 
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import type { MotionValue } from "framer-motion";
+import { useRef } from "react";
 import { ChevronDown } from "lucide-react";
 import { SiGithub, SiInstagram, SiTiktok } from "react-icons/si";
 import { Magnetic } from "@/components/ui/magnetic";
@@ -35,7 +37,7 @@ const SOCIALS = [
   { href: "https://www.tiktok.com/", icon: SiTiktok, label: "TikTok" },
 ];
 
-const WORDS = "FULL STACK WEB DEVELOPER IN THE WORLD".split(" ");
+const WORDS = ["FULL", "STACK", "WEB", "DEVELOPER", "IN", "THE", "WORLD"];
 
 const ROLES = [
   "Full Stack Web Developer",
@@ -44,31 +46,43 @@ const ROLES = [
   "Backend Engineer",
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.12, delayChildren: 0.1 },
-  },
-};
-
-const REVEAL_EASE: [number, number, number, number] = [0.2, 0.65, 0.3, 0.9];
-
-const wordVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: REVEAL_EASE },
-  },
-};
-
-export function Hero() {
-  const isLoaderDone = useLoaderDone();
-  const isMobile = useIsMobile();
+function HeroWord({
+  progress,
+  index,
+  total,
+  word,
+}: {
+  progress: MotionValue<number>;
+  index: number;
+  total: number;
+  word: string;
+}) {
+  const start = index / total;
+  const end = start + 1 / total;
+  const opacity = useTransform(progress, [start, end], [0.15, 1]);
+  const y = useTransform(progress, [start, end], [15, 0]);
 
   return (
-    <section className="relative min-h-screen overflow-hidden">
+    <motion.span
+      style={{ opacity, y }}
+      className="inline-block mr-3 md:mr-5"
+    >
+      {word}
+    </motion.span>
+  );
+}
+
+export function Hero() {
+  const headlineRef = useRef<HTMLDivElement>(null);
+  const isLoaderDone = useLoaderDone();
+  const isMobile = useIsMobile();
+  const { scrollYProgress } = useScroll({
+    target: headlineRef,
+    offset: ["start start", "end end"],
+  });
+
+  return (
+    <section className="relative">
       <div className="absolute inset-0 z-0">
         <BackgroundPaths />
         <div className="absolute inset-0">
@@ -76,28 +90,31 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="relative z-10 flex min-h-screen w-full flex-col items-center justify-center [transform:translateZ(0)] [will-change:transform,opacity]">
-        <div className="mx-auto w-full max-w-6xl px-4 py-8 overflow-hidden">
-          <motion.h1
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            variants={containerVariants}
-            className="flex flex-wrap justify-center text-center font-mono text-3xl font-black uppercase leading-none tracking-tight text-white sm:text-5xl md:text-7xl lg:text-8xl"
-          >
-            {WORDS.map((word) => (
-              <motion.span
-                key={word}
-                variants={wordVariants}
-                className="inline-block whitespace-nowrap px-2"
-              >
-                {word}
-              </motion.span>
-            ))}
-          </motion.h1>
-          <p className="mt-6 text-center font-mono text-xs uppercase tracking-[0.5em] text-neutral-700">
-            full stack web developer
-            <span className="ml-2 inline-block animate-blink text-white">▌</span>
+      <div className="relative z-10">
+        <div
+          ref={headlineRef}
+          className="mx-auto h-[140vh] w-full max-w-6xl px-4 md:h-[180vh] md:px-8"
+        >
+          <div className="sticky top-24 mt-16 flex items-start justify-center md:top-1/3 md:mt-24 md:items-center">
+            <motion.h1
+              className="flex flex-wrap justify-center text-center font-mono text-2xl font-black uppercase leading-none tracking-tight text-white sm:text-4xl md:text-6xl lg:text-7xl"
+            >
+              {WORDS.map((word, i) => (
+                <HeroWord
+                  key={word}
+                  progress={scrollYProgress}
+                  index={i}
+                  total={WORDS.length}
+                  word={word}
+                />
+              ))}
+            </motion.h1>
+          </div>
+          <p className="pointer-events-none absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3">
+            <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-neutral-600">
+              scroll to explore
+            </span>
+            <ChevronDown className="h-4 w-4 animate-bounce text-neutral-500" />
           </p>
         </div>
 
@@ -106,7 +123,7 @@ export function Hero() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="flex w-full flex-col items-center justify-center px-6"
+          className="flex min-h-[60vh] w-full flex-col items-center justify-center px-6 py-24 [transform:translateZ(0)] [will-change:transform,opacity]"
         >
           <Image
             src={SITE.avatar}
@@ -156,16 +173,8 @@ export function Hero() {
               </div>
             </div>
           )}
+          <Spotlight className="z-20" size={520} opacity={0.09} />
         </motion.div>
-
-        <div className="pointer-events-none absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3">
-          <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-neutral-600">
-            scroll to explore
-          </span>
-          <ChevronDown className="h-4 w-4 animate-bounce text-neutral-500" />
-        </div>
-
-        <Spotlight className="z-20" size={520} opacity={0.09} />
       </div>
     </section>
   );

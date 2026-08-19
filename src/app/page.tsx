@@ -13,7 +13,7 @@ import {
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen w-full flex-col items-center justify-start overflow-x-hidden bg-black text-white">
+    <main className="flex min-h-screen w-full flex-col items-center justify-start overflow-x-clip bg-black text-white">
       <TerminalNavbar />
       <div className="w-full">
         <Hero />
