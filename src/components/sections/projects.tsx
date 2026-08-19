@@ -61,7 +61,7 @@ function MockupScreen() {
 
 export function Projects() {
   return (
-    <section id="projects" className="relative mx-auto max-w-6xl overflow-visible px-6 py-32">
+    <section id="projects" className="relative mx-auto w-full max-w-6xl overflow-visible px-4 py-32 md:px-8">
       <div className="pointer-events-none absolute inset-x-[-40vw] top-0 z-0 -rotate-2 opacity-20 select-none mask-fade-x">
         <Marquee duration={36} pauseOnHover>
           {BEAM_WORDS.map((w, i) => (

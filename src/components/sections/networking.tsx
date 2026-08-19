@@ -81,14 +81,14 @@ export function Networking() {
   }, [allNodesReady, nodeEls]);
 
   return (
-    <section id="network" className="relative mx-auto max-w-6xl px-6 py-32">
+    <section id="network" className="relative mx-auto w-full max-w-6xl px-4 py-32 md:px-8">
       <div className="mx-auto max-w-6xl px-0">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-15%" }}
           transition={{ duration: 1, ease: EASE }}
-          className="border-b border-white/20 pb-6"
+          className="border-b border-white/10 pb-6"
         >
           <div className="flex items-baseline justify-between gap-6">
             <h2 className="min-w-0">

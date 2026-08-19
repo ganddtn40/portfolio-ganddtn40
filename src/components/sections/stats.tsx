@@ -40,7 +40,7 @@ export function Stats() {
   const isLoaderDone = useLoaderDone();
 
   return (
-    <section id="stats" className="relative mx-auto max-w-6xl overflow-visible px-6 py-32">
+    <section id="stats" className="relative mx-auto w-full max-w-6xl overflow-visible px-4 py-32 md:px-8">
       <Meteors number={14} className="hidden md:block inset-x-[-20vw] -top-40" />
 
       <motion.div
@@ -48,7 +48,7 @@ export function Stats() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-15%" }}
         transition={{ duration: 1, ease: EASE }}
-        className="border-b border-white/20 pb-6"
+        className="border-b border-white/10 pb-6"
       >
         <div className="flex items-baseline justify-between gap-6">
           <h2 className="min-w-0 font-mono text-base font-semibold text-neutral-300 md:text-xl">
@@ -66,7 +66,7 @@ export function Stats() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-10%" }}
         transition={{ duration: 0.9, ease: EASE }}
-        className="mt-16 grid grid-cols-1 items-start gap-16 md:grid-cols-[minmax(0,1fr)_240px]"
+        className="mt-16 flex flex-col items-center gap-16"
       >
         <div className="w-full max-w-[100vw] overflow-x-auto pb-4 scrollbar-thin">
           <div className="min-w-max">
@@ -74,7 +74,7 @@ export function Stats() {
           </div>
         </div>
 
-        <div className="relative mx-auto hidden w-full max-w-[240px] md:block">
+        <div className="relative mx-auto block w-full max-w-[240px]">
           <ParallaxGif>
             <WobbleCard className="w-full max-w-[240px]">
               <div className="relative h-[320px] min-h-[250px] w-full">

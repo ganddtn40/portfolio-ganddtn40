@@ -29,13 +29,13 @@ const SKILLS = [
 
 export function Technologies() {
   return (
-    <section id="stack" className="relative mx-auto max-w-6xl px-6 py-32">
+    <section id="stack" className="relative mx-auto w-full max-w-6xl px-4 py-32 md:px-8">
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-15%" }}
         transition={{ duration: 1, ease: EASE }}
-        className="border-b border-white/20 pb-6"
+        className="border-b border-white/10 pb-6"
       >
         <div className="flex items-baseline justify-between gap-6">
           <h2 className="min-w-0">
@@ -50,12 +50,13 @@ export function Technologies() {
         </div>
       </motion.div>
 
-      <div className="mt-16 grid grid-cols-1 gap-16 md:grid-cols-2">
+      <div className="mt-16 flex flex-col items-center gap-16">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-10%" }}
           transition={{ duration: 0.9, ease: EASE }}
+          className="w-full max-w-2xl"
         >
           <ul>
             {SKILLS.map((s, i) => (

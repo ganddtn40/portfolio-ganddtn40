@@ -81,13 +81,13 @@ function MacTerminal() {
 
 export function Whoami() {
   return (
-    <section id="whoami" className="relative mx-auto max-w-6xl px-6 py-32">
+    <section id="whoami" className="relative mx-auto w-full max-w-6xl px-4 py-32 md:px-8">
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-15%" }}
         transition={{ duration: 1, ease: EASE }}
-        className="border-b border-white/20 pb-6"
+        className="border-b border-white/10 pb-6"
       >
         <div className="flex items-baseline justify-between gap-6">
           <h2 className="font-mono text-3xl font-bold uppercase tracking-tight text-white md:text-5xl">
@@ -99,12 +99,13 @@ export function Whoami() {
         </div>
       </motion.div>
 
-      <div className="mt-16 grid grid-cols-1 items-center gap-16 md:grid-cols-2">
+      <div className="mt-16 flex flex-col items-center gap-16">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-10%" }}
           transition={{ duration: 0.9, ease: EASE }}
+          className="w-full max-w-2xl"
         >
           <div className="inline-block border-2 border-white/25 p-2">
             <Image
@@ -136,7 +137,7 @@ export function Whoami() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: "-10%" }}
           transition={{ duration: 1, ease: EASE }}
-          className="relative flex justify-center md:justify-end"
+          className="relative flex w-full justify-center"
         >
           <ParallaxGif>
             <WobbleCard className="w-full max-w-md">

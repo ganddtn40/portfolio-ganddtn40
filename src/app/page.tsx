@@ -13,9 +13,9 @@ import {
 
 export default function Home() {
   return (
-    <div className="flex w-full max-w-full flex-1 flex-col font-sans text-white">
+    <main className="flex min-h-screen w-full flex-col items-center justify-start overflow-x-hidden bg-black text-white">
       <TerminalNavbar />
-      <main className="flex min-h-screen w-full max-w-full flex-1 overflow-x-clip">
+      <div className="w-full">
         <Hero />
         <TracingBeam>
           <Whoami />
@@ -26,7 +26,7 @@ export default function Home() {
           <LazyNetworking />
           <Footer />
         </TracingBeam>
-      </main>
-    </div>
+      </div>
+    </main>
   );
 }
