@@ -61,7 +61,7 @@ export function Stats() {
             <GlitchText text="./github_contributions.sh" />
           </h2>
           <span className="hidden shrink-0 font-mono text-xs text-neutral-600 sm:block">
-            one year Â· real data
+            one year · real data
           </span>
         </div>
       </m.div>

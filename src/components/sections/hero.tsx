@@ -75,25 +75,6 @@ function ScrollWord({
   );
 }
 
-function ViewWord({ word, index }: { word: string; index: number }) {
-  return (
-    <span
-      className="inline-block leading-none"
-      style={{ willChange: "opacity, transform", WebkitTransform: "translateZ(0)" }}
-    >
-      <m.span
-        initial={{ opacity: 0.1, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ amount: 0.4 }}
-        transition={{ delay: index * 0.08, duration: 0.5, ease: "easeOut" }}
-        className="inline-block leading-none"
-      >
-        {word}
-      </m.span>
-    </span>
-  );
-}
-
 export function Hero() {
   const headlineRef = useRef<HTMLDivElement>(null);
   const isLoaderDone = useLoaderDone();
@@ -109,7 +90,7 @@ export function Hero() {
         <ErrorBoundary>
           <BackgroundPaths />
           <div className="absolute inset-0 [contain:layout_paint]">
-            {!isMobile && (
+            {isLoaderDone && !isMobile && (
               <ErrorBoundary>
                 <Sparkles density={100} />
               </ErrorBoundary>
@@ -118,19 +99,30 @@ export function Hero() {
         </ErrorBoundary>
       </div>
 
-      <div className="relative z-10">
-        <div
-          ref={headlineRef}
-          className="mx-auto h-[120vh] w-full max-w-6xl px-4 md:h-[200vh] md:px-8"
+      <div className="pointer-events-none absolute top-[calc(100vh-5rem)] left-1/2 z-30 -translate-x-1/2">
+        <m.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ repeat: Infinity, duration: 1.5 }}
+          className="flex flex-col items-center opacity-70"
         >
-          <div className="sticky top-24 relative z-50 mt-16 flex items-start justify-center [transform:translate3d(0,0,0)] [will-change:transform] md:top-1/3 md:mt-24 md:items-center">
-            <m.h1
-              className="flex flex-col items-center text-center font-gothic text-2xl font-black uppercase leading-none text-white -tracking-widest drop-shadow-[0_10px_10px_rgba(255,255,255,0.2)] sm:text-4xl md:text-6xl lg:text-7xl"
-            >
-              {WORDS.map((word, i) =>
-                isMobile ? (
-                  <ViewWord key={word} word={word} index={i} />
-                ) : (
+          <span className="mb-2 font-mono text-xs uppercase tracking-widest">
+            Scroll to explore
+          </span>
+          <ChevronDown className="h-5 w-5" />
+        </m.div>
+      </div>
+
+      <div className="relative z-10">
+        <div className="hidden md:block">
+          <div
+            ref={headlineRef}
+            className="mx-auto h-[200vh] w-full max-w-6xl px-8"
+          >
+            <div className="sticky top-1/3 z-50 mt-24 flex items-center justify-center [transform:translate3d(0,0,0)] [will-change:transform]">
+              <m.h1
+                className="flex flex-col items-center text-center font-gothic text-2xl font-black uppercase leading-none text-white -tracking-widest drop-shadow-[0_10px_10px_rgba(255,255,255,0.2)] sm:text-4xl md:text-6xl lg:text-7xl"
+              >
+                {WORDS.map((word, i) => (
                   <ScrollWord
                     key={word}
                     progress={scrollYProgress}
@@ -138,16 +130,21 @@ export function Hero() {
                     total={WORDS.length}
                     word={word}
                   />
-                ),
-              )}
-            </m.h1>
+                ))}
+              </m.h1>
+            </div>
           </div>
-          <p className="pointer-events-none absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3">
-            <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-neutral-600">
-              scroll to explore
-            </span>
-            <ChevronDown className="h-4 w-4 animate-bounce text-neutral-500" />
-          </p>
+        </div>
+
+        <div className="block px-4 md:hidden">
+          <m.h1
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mt-32 text-center font-gothic text-4xl font-black uppercase leading-tight text-white -tracking-widest"
+          >
+            FULL STACK WEB DEVELOPER IN THE WORLD
+          </m.h1>
         </div>
 
         <m.div

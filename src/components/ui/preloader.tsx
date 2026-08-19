@@ -46,7 +46,7 @@ export function IntroLoader({
 
   return (
     <>
-      <AnimatePresence onExitComplete={() => setReady(true)}>
+      <AnimatePresence mode="wait" onExitComplete={() => setReady(true)}>
         {!exitStarted && (
           <m.div
             className="fixed inset-0 z-[9998] flex flex-col items-center justify-center bg-black"

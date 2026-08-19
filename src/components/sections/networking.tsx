@@ -10,8 +10,8 @@ import { useLoaderDone } from "@/components/ui/loader-provider";
 import { EASE } from "@/lib/easing";
 
 const nodes = [
-  { ref: "node-0", label: "api-gateway", sub: "edge Â· nginx", x: "left-[2%] top-[34%] sm:left-[3%]" },
-  { ref: "node-1", label: "worker-pool", sub: "queue Â· redis", x: "right-[2%] top-[12%] sm:right-[2%]" },
+  { ref: "node-0", label: "api-gateway", sub: "edge · nginx", x: "left-[2%] top-[34%] sm:left-[3%]" },
+  { ref: "node-1", label: "worker-pool", sub: "queue · redis", x: "right-[2%] top-[12%] sm:right-[2%]" },
   { ref: "node-2", label: "data-tomb", sub: "postgres", x: "right-[2%] bottom-[8%] sm:right-[4%]" },
   { ref: "node-3", label: "cache-layer", sub: "redis", x: "left-[2%] bottom-[14%] sm:left-[4%]" },
 ];

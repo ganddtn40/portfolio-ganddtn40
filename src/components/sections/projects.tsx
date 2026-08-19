@@ -71,7 +71,7 @@ export function Projects() {
               className="whitespace-nowrap font-mono text-6xl font-bold uppercase text-transparent text-outline md:text-8xl"
             >
               {w}
-              <span className="mx-10 inline-block text-neutral-900">âœ</span>
+              <span className="mx-10 inline-block text-neutral-900">&#10013;</span>
             </span>
           ))}
         </Marquee>

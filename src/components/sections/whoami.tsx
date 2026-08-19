@@ -62,7 +62,7 @@ function MacTerminal() {
           <span className="text-white">cat info.txt</span>
         </p>
         <p className="mt-5 text-[10px] uppercase tracking-[0.3em] text-neutral-600">
-          â”€â”€ info.txt â”€â”€
+          ── info.txt ──
         </p>
         <dl className="mt-2 divide-y divide-neutral-900 text-sm">
           {INFO_ROWS.map(([k, v]) => (
@@ -171,7 +171,7 @@ export function Whoami() {
               className="whitespace-nowrap font-mono text-3xl font-bold uppercase text-transparent text-outline transition-colors duration-500 hover:text-white md:text-5xl"
             >
               {w}
-              <span className="mx-6 inline-block text-neutral-800">âœ</span>
+              <span className="mx-6 inline-block text-neutral-800">&#10013;</span>
             </span>
           ))}
         </Marquee>

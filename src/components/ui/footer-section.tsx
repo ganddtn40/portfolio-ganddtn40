@@ -81,7 +81,7 @@ export function Footer() {
         <AnimatedContainer className="space-y-4">
           <Frame className="size-8" />
           <p className="text-muted-foreground mt-8 text-sm md:mt-0">
-            Â© 2026 {SITE.name} (lyhsjaa). Built with Next.js.
+            &copy; 2026 {SITE.name} (lyhsjaa). Built with Next.js.
           </p>
         </AnimatedContainer>
 
