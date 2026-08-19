@@ -13,6 +13,7 @@ import { Spotlight } from "@/components/ui/spotlight";
 import { Typewriter } from "@/components/ui/typewriter";
 import { useLoaderDone } from "@/components/ui/loader-provider";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { EASE } from "@/lib/easing";
 import { SITE } from "@/lib/site";
 
 const BackgroundPaths = dynamic(
@@ -125,9 +126,15 @@ export function Hero() {
                     <span className="mx-3 text-neutral-900">/</span>
                     {`0${FRAMES - 1}`}
                   </span>
-                  <div className="px-4 text-center font-mono text-[15vw] font-bold uppercase leading-none tracking-tight text-white md:text-[8rem] lg:text-[11rem]">
+                  <motion.span
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: false, margin: "-50px" }}
+                    transition={{ duration: 0.7, ease: EASE }}
+                    className="inline-block px-4 text-center font-mono text-3xl font-black uppercase leading-none tracking-tighter text-white sm:text-5xl md:text-7xl lg:text-8xl"
+                  >
                     {word}
-                  </div>
+                  </motion.span>
                   <span className="mt-6 font-mono text-[10px] uppercase tracking-[0.5em] text-neutral-700">
                     ✝
                   </span>

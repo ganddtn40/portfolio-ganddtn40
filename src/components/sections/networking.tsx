@@ -6,21 +6,19 @@ import { WireframeDottedGlobe } from "@/components/ui/wireframe-globe";
 import { AnimatedBeam } from "@/components/ui/animated-beam";
 import { HyperText } from "@/components/ui/hyper-text";
 import { useLoaderDone } from "@/components/ui/loader-provider";
-import { useIsMobile } from "@/hooks/use-mobile";
 import { EASE } from "@/lib/easing";
 
 const nodes = [
-  { ref: "node-0", label: "api-gateway", sub: "edge · nginx", x: "left-[3%] top-[34%]" },
-  { ref: "node-1", label: "worker-pool", sub: "queue · redis", x: "right-[2%] top-[12%]" },
-  { ref: "node-2", label: "data-tomb", sub: "postgres", x: "right-[4%] bottom-[8%]" },
-  { ref: "node-3", label: "cache-layer", sub: "redis", x: "left-[4%] bottom-[14%]" },
+  { ref: "node-0", label: "api-gateway", sub: "edge · nginx", x: "left-[2%] top-[34%] sm:left-[3%]" },
+  { ref: "node-1", label: "worker-pool", sub: "queue · redis", x: "right-[2%] top-[12%] sm:right-[2%]" },
+  { ref: "node-2", label: "data-tomb", sub: "postgres", x: "right-[2%] bottom-[8%] sm:right-[4%]" },
+  { ref: "node-3", label: "cache-layer", sub: "redis", x: "left-[2%] bottom-[14%] sm:left-[4%]" },
 ];
 
 export function Networking() {
   const containerRef = useRef<HTMLDivElement>(null);
   const globeRef = useRef<HTMLDivElement | null>(null);
   const isLoaderDone = useLoaderDone();
-  const isMobile = useIsMobile();
   const [nodeEls, setNodeEls] = useState<Record<string, HTMLDivElement | null>>(
     {},
   );
@@ -131,21 +129,10 @@ export function Networking() {
         >
           <div className="gothic-grid absolute inset-0 z-0 opacity-60" />
 
-          <div className="absolute inset-0 z-[1] flex items-center justify-center px-6">
-            {isLoaderDone &&
-              (isMobile ? (
-                <div
-                  ref={globeRef}
-                  className="relative flex h-52 w-52 items-center justify-center rounded-full border border-neutral-800 bg-neutral-950/60 md:hidden"
-                >
-                  <div className="gothic-grid absolute inset-0 rounded-full opacity-40" />
-                  <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-neutral-600">
-                    world.wired
-                  </span>
-                </div>
-              ) : (
-                <WireframeDottedGlobe globeRef={globeRef} />
-              ))}
+          <div className="absolute inset-0 z-[1] flex w-full items-center justify-center overflow-hidden px-6 py-8">
+            <div className="mx-auto w-full max-w-[340px] sm:max-w-[500px] md:max-w-[650px]">
+              {isLoaderDone && <WireframeDottedGlobe globeRef={globeRef} />}
+            </div>
           </div>
 
           {nodes.map((n) => (
