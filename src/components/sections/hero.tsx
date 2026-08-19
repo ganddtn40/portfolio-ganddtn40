@@ -127,11 +127,11 @@ export function Hero() {
                     {`0${FRAMES - 1}`}
                   </span>
                   <motion.span
-                    initial={{ opacity: 0, y: 50 }}
+                    initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: false, margin: "-50px" }}
+                    viewport={{ once: true }}
                     transition={{ duration: 0.7, ease: EASE }}
-                    className="inline-block px-4 text-center font-mono text-3xl font-black uppercase leading-none tracking-tighter text-white sm:text-5xl md:text-7xl lg:text-8xl"
+                    className="inline-block px-4 text-center font-mono text-3xl font-black uppercase leading-none tracking-tight text-white sm:text-5xl md:text-7xl lg:text-8xl"
                   >
                     {word}
                   </motion.span>

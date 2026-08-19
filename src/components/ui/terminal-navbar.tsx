@@ -103,7 +103,7 @@ export function TerminalNavbar() {
     <header
       className={`fixed top-6 left-1/2 transform -translate-x-1/2 z-40
                  flex flex-col items-center
-                 px-3 py-3 sm:px-6
+                 px-4 py-3 sm:px-8
                  ${headerShapeClass}
                  border border-neutral-800 bg-neutral-950
                  w-[calc(100%-1.5rem)] max-w-full box-border

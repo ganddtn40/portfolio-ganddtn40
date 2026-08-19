@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <div className="flex w-full max-w-full flex-1 flex-col font-sans text-white">
       <TerminalNavbar />
-      <main className="flex-1">
+      <main className="flex min-h-screen w-full max-w-full flex-1 overflow-x-clip">
         <Hero />
         <TracingBeam>
           <Whoami />

@@ -34,7 +34,7 @@ function RotatingEarth({
   }, []);
 
   useEffect(() => {
-    const scaleFactor = window.innerWidth < 768 ? 0.6 : 1;
+    const scaleFactor = window.innerWidth < 768 ? 0.55 : 1;
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -123,8 +123,7 @@ function RotatingEarth({
     <div
       ref={globeRef}
       onMouseMove={handleMouseMove}
-      className="flex w-full items-center justify-center"
-      style={{ width: "100%", maxWidth: "650px", aspectRatio: "1/1" }}
+      className="flex aspect-square w-full items-center justify-center"
     >
       <canvas ref={canvasRef} className="mx-auto" style={{ width, height }} />
     </div>
@@ -145,7 +144,7 @@ export function WireframeDottedGlobe({
 
     const update = () => {
       const w = el.getBoundingClientRect().width;
-      setSize(Math.max(0, Math.min(Math.round(w), 650)));
+      setSize(Math.max(0, Math.min(Math.round(w), 600)));
     };
 
     const ro = new ResizeObserver(update);
@@ -154,7 +153,7 @@ export function WireframeDottedGlobe({
   }, []);
 
   return (
-    <div ref={containerRef} className="flex w-full items-center justify-center">
+    <div ref={containerRef} className="flex h-full w-full items-center justify-center">
       <RotatingEarth width={size} height={size} globeRef={globeRef} />
     </div>
   );
