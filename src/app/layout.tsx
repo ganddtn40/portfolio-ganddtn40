@@ -3,6 +3,7 @@ import { Cinzel, Cormorant_Garamond, Inter, JetBrains_Mono } from "next/font/goo
 import { CursorLayer } from "@/components/ui/cursor-layer";
 import { DotPatternLayer } from "@/components/ui/dot-pattern-layer";
 import { LoaderProvider } from "@/components/ui/loader-provider";
+import { MotionProvider } from "@/components/ui/motion-provider";
 import { SmoothScrollProvider } from "@/components/ui/smooth-scroll";
 import "./globals.css";
 
@@ -89,7 +90,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <DotPatternLayer />
         <CursorLayer />
         <LoaderProvider>
-          <SmoothScrollProvider>{children}</SmoothScrollProvider>
+          <MotionProvider>
+            <SmoothScrollProvider>{children}</SmoothScrollProvider>
+          </MotionProvider>
         </LoaderProvider>
       </body>
     </html>

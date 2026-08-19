@@ -1,8 +1,8 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import {
-  motion,
+  m,
   useMotionTemplate,
   useMotionValue,
   useSpring,
@@ -24,7 +24,7 @@ export function Spotlight({ className, size = 640, opacity = 0.12 }: SpotlightPr
   const background = useMotionTemplate`radial-gradient(${size}px circle at ${sx}px ${sy}px, rgba(255,255,255,${opacity}), transparent 65%)`;
 
   return (
-    <motion.div
+    <m.div
       ref={ref}
       aria-hidden="true"
       className={cn("pointer-events-none absolute inset-0", className)}

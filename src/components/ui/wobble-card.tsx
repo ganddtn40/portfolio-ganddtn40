@@ -1,8 +1,8 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import {
-  motion,
+  m,
   useMotionValue,
   useSpring,
   useTransform,
@@ -29,7 +29,7 @@ export function WobbleCard({ children, className, strength = 14 }: WobbleCardPro
   });
 
   return (
-    <motion.div
+    <m.div
       ref={ref}
       style={{ rotateX, rotateY, transformPerspective: 900 }}
       className={cn("relative", className)}
@@ -45,6 +45,6 @@ export function WobbleCard({ children, className, strength = 14 }: WobbleCardPro
       }}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }

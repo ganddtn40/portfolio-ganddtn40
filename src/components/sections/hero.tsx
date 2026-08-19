@@ -1,8 +1,8 @@
-"use client";
+﻿"use client";
 
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { m, useScroll, useTransform } from "framer-motion";
 import type { MotionValue } from "framer-motion";
 import { useRef } from "react";
 import { ChevronDown } from "lucide-react";
@@ -60,16 +60,13 @@ function HeroWord({
 }) {
   const start = index / total;
   const end = start + 1 / total;
-  const opacity = useTransform(progress, [start, end], [0.15, 1]);
-  const y = useTransform(progress, [start, end], [15, 0]);
+  const opacity = useTransform(progress, [start, end], [0, 1]);
+  const y = useTransform(progress, [start, end], [-30, 0]);
 
   return (
-    <motion.span
-      style={{ opacity, y }}
-      className="inline-block mr-3 md:mr-5"
-    >
+    <m.span style={{ opacity, y }} className="inline-block leading-none">
       {word}
-    </motion.span>
+    </m.span>
   );
 }
 
@@ -87,7 +84,7 @@ export function Hero() {
       <div className="absolute inset-0 z-0">
         <ErrorBoundary>
           <BackgroundPaths />
-          <div className="absolute inset-0">
+          <div className="absolute inset-0 [contain:layout_paint]">
             {!isMobile && (
               <ErrorBoundary>
                 <Sparkles density={100} />
@@ -103,8 +100,8 @@ export function Hero() {
           className="mx-auto h-[140vh] w-full max-w-6xl px-4 md:h-[180vh] md:px-8"
         >
           <div className="sticky top-24 mt-16 flex items-start justify-center [transform:translate3d(0,0,0)] [will-change:transform] md:top-1/3 md:mt-24 md:items-center">
-            <motion.h1
-              className="flex flex-wrap justify-center text-center font-gothic text-2xl font-black uppercase leading-none text-white -tracking-widest drop-shadow-[0_10px_10px_rgba(255,255,255,0.2)] sm:text-4xl md:text-6xl lg:text-7xl"
+            <m.h1
+              className="flex flex-col items-center text-center font-gothic text-2xl font-black uppercase leading-none text-white -tracking-widest drop-shadow-[0_10px_10px_rgba(255,255,255,0.2)] sm:text-4xl md:text-6xl lg:text-7xl"
             >
               {WORDS.map((word, i) => (
                 <HeroWord
@@ -115,7 +112,7 @@ export function Hero() {
                   word={word}
                 />
               ))}
-            </motion.h1>
+            </m.h1>
           </div>
           <p className="pointer-events-none absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3">
             <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-neutral-600">
@@ -125,7 +122,7 @@ export function Hero() {
           </p>
         </div>
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -150,7 +147,7 @@ export function Hero() {
               <Typewriter text="$ cat profile.md" speed={55} />
             </span>
             <br />
-            {SITE.role} — reliable, fast web systems from SQL schemas to
+            {SITE.role} â€” reliable, fast web systems from SQL schemas to
             pixels.
           </p>
           <div className="mt-8 flex items-center gap-8">
@@ -170,21 +167,18 @@ export function Hero() {
               </Magnetic>
             ))}
           </div>
-          <div
-            className={`pointer-events-none mt-10 flex w-full justify-center transition-opacity duration-700 [transform:translate3d(0,0,0)] [will-change:transform,opacity] ${
-              isLoaderDone ? "opacity-100" : "pointer-events-none opacity-0"
-            }`}
-            aria-hidden={!isLoaderDone}
-          >
-            <div className="h-[28vh] min-h-[220px] w-full max-w-lg opacity-70 md:h-[36vh]">
-              <SplineScene
-                scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-                className="h-full w-full"
-              />
+          {isLoaderDone && (
+            <div className="mt-10 flex w-full justify-center [transform:translate3d(0,0,0)] [will-change:transform,opacity]">
+              <div className="h-[28vh] min-h-[220px] w-full max-w-lg opacity-70 [contain:layout_paint] md:h-[36vh]">
+                <SplineScene
+                  scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+                  className="h-full w-full"
+                />
+              </div>
             </div>
-          </div>
+          )}
           <Spotlight className="z-20" size={520} opacity={0.09} />
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

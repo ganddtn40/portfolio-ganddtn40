@@ -1,7 +1,7 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { m, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { GlitchText } from "@/components/ui/glitch-text";
 import { HackerText } from "@/components/ui/hacker-text";
@@ -26,13 +26,13 @@ function ParallaxGif({ children }: { children: React.ReactNode }) {
   const y = useTransform(scrollYProgress, [0, 1], [70, -70]);
 
   return (
-    <motion.div
+    <m.div
       ref={ref}
       style={{ y }}
       className="relative [transform:translateZ(0)] [will-change:transform]"
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -51,7 +51,7 @@ function MacTerminal() {
         <span className="h-3 w-3 rounded-full bg-yellow-500" />
         <span className="h-3 w-3 rounded-full bg-green-500" />
         <span className="ml-3 truncate text-xs text-neutral-500">
-          {SITE.name} — zsh — portfolio
+          {SITE.name} â€” zsh â€” portfolio
         </span>
       </div>
       <div className="px-5 py-5">
@@ -62,7 +62,7 @@ function MacTerminal() {
           <span className="text-white">cat info.txt</span>
         </p>
         <p className="mt-5 text-[10px] uppercase tracking-[0.3em] text-neutral-600">
-          ── info.txt ──
+          â”€â”€ info.txt â”€â”€
         </p>
         <dl className="mt-2 divide-y divide-neutral-900 text-sm">
           {INFO_ROWS.map(([k, v]) => (
@@ -86,7 +86,7 @@ function MacTerminal() {
 export function Whoami() {
   return (
     <section id="whoami" className="relative mx-auto w-full max-w-6xl px-4 py-32 md:px-8">
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-15%" }}
@@ -95,16 +95,16 @@ export function Whoami() {
       >
         <div className="flex items-baseline justify-between gap-6">
           <h2 className="font-mono text-3xl font-bold uppercase tracking-tight text-white md:text-5xl">
-            <GlitchText text="00 — whoami" />
+            <GlitchText text="00 â€” whoami" />
           </h2>
           <span className="hidden font-mono text-xs text-neutral-600 sm:block">
             {SITE.name}
           </span>
         </div>
-      </motion.div>
+      </m.div>
 
       <div className="mt-16 grid grid-cols-1 items-start gap-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,440px)]">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-10%" }}
@@ -128,15 +128,15 @@ export function Whoami() {
             <br />
             <br />
             {SITE.role} from {SITE.origin}. TypeScript, SQL, PHP, Dart, HTML5,
-            CSS3, JS — and nothing else. Recently shipped{" "}
+            CSS3, JS â€” and nothing else. Recently shipped{" "}
             <span className="text-white">{SITE.project}</span>, a static
             landing site for a tea & coffee cafe.
           </p>
 
           <MacTerminal />
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, scale: 0.96 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: "-10%" }}
@@ -160,7 +160,7 @@ export function Whoami() {
               </WobbleCard>
             </ParallaxGif>
           </div>
-        </motion.div>
+        </m.div>
       </div>
 
       <div className="mt-32 mask-fade-x">
@@ -171,7 +171,7 @@ export function Whoami() {
               className="whitespace-nowrap font-mono text-3xl font-bold uppercase text-transparent text-outline transition-colors duration-500 hover:text-white md:text-5xl"
             >
               {w}
-              <span className="mx-6 inline-block text-neutral-800">✝</span>
+              <span className="mx-6 inline-block text-neutral-800">âœ</span>
             </span>
           ))}
         </Marquee>

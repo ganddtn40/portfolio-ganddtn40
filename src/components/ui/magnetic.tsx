@@ -1,7 +1,7 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { m, useMotionValue, useSpring } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface MagneticProps {
@@ -18,7 +18,7 @@ export function Magnetic({ children, className, strength = 0.3 }: MagneticProps)
   const sy = useSpring(y, { stiffness: 180, damping: 15 });
 
   return (
-    <motion.div
+    <m.div
       ref={ref}
       className={cn("inline-block", className)}
       style={{ x: sx, y: sy }}
@@ -34,6 +34,6 @@ export function Magnetic({ children, className, strength = 0.3 }: MagneticProps)
       }}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }

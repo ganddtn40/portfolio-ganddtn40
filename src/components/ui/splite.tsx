@@ -1,12 +1,6 @@
-"use client";
+﻿"use client";
 
-import { Suspense, lazy, useEffect, useRef } from "react";
-import {
-  motion,
-  useMotionValue,
-  useSpring,
-  useTransform,
-} from "framer-motion";
+import { Suspense, lazy, useEffect, useRef, useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { ErrorBoundary } from "@/components/ui/error-boundary";
 
@@ -20,28 +14,23 @@ interface SplineSceneProps {
 export function SplineScene({ scene, className }: SplineSceneProps) {
   const isMobile = useIsMobile();
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const mx = useMotionValue(0.5);
-  const my = useMotionValue(0.5);
-  const rotateY = useSpring(useTransform(mx, [0, 1], [86, -86]), {
-    stiffness: 160,
-    damping: 18,
-    mass: 0.5,
-  });
-  const rotateX = useSpring(useTransform(my, [0, 1], [40, -40]), {
-    stiffness: 160,
-    damping: 18,
-    mass: 0.5,
-  });
+  const [inView, setInView] = useState(false);
 
   useEffect(() => {
-    if (isMobile) return;
-    const onMove = (e: MouseEvent) => {
-      mx.set(e.clientX / window.innerWidth);
-      my.set(e.clientY / window.innerHeight);
-    };
-    window.addEventListener("mousemove", onMove, { passive: true });
-    return () => window.removeEventListener("mousemove", onMove);
-  }, [isMobile, mx, my]);
+    const el = containerRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "300px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   if (isMobile) {
     return (
@@ -59,28 +48,31 @@ export function SplineScene({ scene, className }: SplineSceneProps) {
   }
 
   return (
-    <ErrorBoundary>
-      <Suspense
-        fallback={
+    <div
+      ref={containerRef}
+      className={`${className ?? ""} relative h-full w-full [contain:layout_paint]`}
+    >
+      <ErrorBoundary>
+        {inView ? (
+          <Suspense
+            fallback={
+              <div className="flex h-full w-full items-center justify-center">
+                <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-neutral-600 animate-blink">
+                  loading scene_
+                </span>
+              </div>
+            }
+          >
+            <Spline scene={scene} renderOnDemand />
+          </Suspense>
+        ) : (
           <div className="flex h-full w-full items-center justify-center">
-            <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-neutral-600 animate-blink">
-              loading scene_
+            <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-neutral-700 animate-blink">
+              booting scene_
             </span>
           </div>
-        }
-      >
-        <div
-          ref={containerRef}
-          className="h-full w-full [perspective:900px] [transform:translate3d(0,0,0)] [will-change:transform]"
-        >
-          <motion.div
-            style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-            className="h-full w-full grayscale contrast-125"
-          >
-            <Spline scene={scene} className={className} renderOnDemand />
-          </motion.div>
-        </div>
-      </Suspense>
-    </ErrorBoundary>
+        )}
+      </ErrorBoundary>
+    </div>
   );
 }

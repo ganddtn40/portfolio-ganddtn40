@@ -1,6 +1,6 @@
-"use client";
+﻿"use client";
 
-import { motion, useInView, useReducedMotion } from "framer-motion";
+import { m, useInView, useReducedMotion } from "framer-motion";
 import { useMemo, useRef } from "react";
 import { EASE } from "@/lib/easing";
 
@@ -40,7 +40,7 @@ function FloatingPaths({
       preserveAspectRatio="xMidYMid slice"
     >
       {paths.map((path) => (
-        <motion.path
+        <m.path
           key={path.id}
           d={path.d}
           stroke="currentColor"
@@ -94,14 +94,14 @@ export function BackgroundPaths({
         <FloatingPaths position={-1} animated={inView} />
       </div>
 
-      <motion.div
+      <m.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.6, ease: EASE }}
         className="relative z-10 w-full"
       >
         {children}
-      </motion.div>
+      </m.div>
     </div>
   );
 }

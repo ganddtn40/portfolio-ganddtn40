@@ -1,8 +1,8 @@
-"use client";
+﻿"use client";
 
 import dynamic from "next/dynamic";
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { m, useScroll, useTransform } from "framer-motion";
 import { GlitchText } from "@/components/ui/glitch-text";
 import { ErrorBoundary } from "@/components/ui/error-boundary";
 import { Meteors } from "@/components/ui/meteors";
@@ -31,13 +31,13 @@ function ParallaxGif({ children }: { children: React.ReactNode }) {
   const y = useTransform(scrollYProgress, [0, 1], [60, -60]);
 
   return (
-    <motion.div
+    <m.div
       ref={ref}
       style={{ y }}
       className="relative [transform:translate3d(0,0,0)] [will-change:transform]"
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -48,7 +48,7 @@ export function Stats() {
     <section id="stats" className="relative mx-auto w-full max-w-6xl overflow-visible px-4 py-32 md:px-8">
       <Meteors number={14} className="hidden md:block inset-x-[-20vw] -top-40" />
 
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-15%" }}
@@ -61,28 +61,25 @@ export function Stats() {
             <GlitchText text="./github_contributions.sh" />
           </h2>
           <span className="hidden shrink-0 font-mono text-xs text-neutral-600 sm:block">
-            one year · real data
+            one year Â· real data
           </span>
         </div>
-      </motion.div>
+      </m.div>
 
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-10%" }}
         transition={{ duration: 0.9, ease: EASE }}
         className="mt-16 grid grid-cols-1 items-start gap-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,260px)]"
       >
-        <div
-          className={`w-full max-w-[100vw] overflow-x-auto pb-4 transition-opacity duration-700 scrollbar-thin ${
-            isLoaderDone ? "opacity-100" : "pointer-events-none opacity-0"
-          }`}
-          aria-hidden={!isLoaderDone}
-        >
+        <div className="w-full max-w-[100vw] overflow-x-auto pb-4 scrollbar-thin">
           <div className="min-w-max">
-            <ErrorBoundary>
-              <GithubCalendar username={SITE.name} />
-            </ErrorBoundary>
+            {isLoaderDone && (
+              <ErrorBoundary>
+                <GithubCalendar username={SITE.name} />
+              </ErrorBoundary>
+            )}
           </div>
         </div>
 
@@ -103,7 +100,7 @@ export function Stats() {
             </WobbleCard>
           </ParallaxGif>
         </div>
-      </motion.div>
+      </m.div>
     </section>
   );
 }

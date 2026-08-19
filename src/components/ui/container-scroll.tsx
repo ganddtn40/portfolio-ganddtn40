@@ -1,7 +1,7 @@
-"use client";
+﻿"use client";
 
 import React, { useRef } from "react";
-import { useScroll, useTransform, motion } from "framer-motion";
+import { useScroll, useTransform, m } from "framer-motion";
 import type { MotionValue } from "framer-motion";
 
 export const ContainerScroll = ({
@@ -60,12 +60,12 @@ export const Header = ({
   titleComponent: React.ReactNode;
 }) => {
   return (
-    <motion.div
+    <m.div
       style={{ translateY: translate }}
       className="mx-auto max-w-5xl text-center"
     >
       {titleComponent}
-    </motion.div>
+    </m.div>
   );
 };
 
@@ -81,7 +81,7 @@ export const Card = ({
   children: React.ReactNode;
 }) => {
   return (
-    <motion.div
+    <m.div
       style={{
         rotateX: rotate,
         scale,
@@ -94,6 +94,6 @@ export const Card = ({
       <div className="h-full w-full overflow-hidden rounded-none bg-neutral-900">
         {children}
       </div>
-    </motion.div>
+    </m.div>
   );
 };

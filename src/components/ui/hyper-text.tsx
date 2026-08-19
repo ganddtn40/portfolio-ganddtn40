@@ -1,6 +1,6 @@
-"use client";
+﻿"use client";
 
-import { motion, Variants } from "framer-motion";
+import { m, Variants } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
 import { cn } from "@/lib/utils";
@@ -74,13 +74,13 @@ export function HyperText({
         onMouseEnter={triggerAnimation}
       >
         {displayText.map((letter, i) => (
-          <motion.span
+          <m.span
             key={i}
             className={cn("font-mono", letter === " " ? "w-3" : "", className)}
             {...framerProps}
           >
             {letter.toUpperCase()}
-          </motion.span>
+          </m.span>
         ))}
       </div>
   );

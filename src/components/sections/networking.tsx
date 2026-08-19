@@ -1,6 +1,6 @@
-"use client";
+﻿"use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { WireframeDottedGlobe } from "@/components/ui/wireframe-globe";
 import { AnimatedBeam } from "@/components/ui/animated-beam";
@@ -10,8 +10,8 @@ import { useLoaderDone } from "@/components/ui/loader-provider";
 import { EASE } from "@/lib/easing";
 
 const nodes = [
-  { ref: "node-0", label: "api-gateway", sub: "edge · nginx", x: "left-[2%] top-[34%] sm:left-[3%]" },
-  { ref: "node-1", label: "worker-pool", sub: "queue · redis", x: "right-[2%] top-[12%] sm:right-[2%]" },
+  { ref: "node-0", label: "api-gateway", sub: "edge Â· nginx", x: "left-[2%] top-[34%] sm:left-[3%]" },
+  { ref: "node-1", label: "worker-pool", sub: "queue Â· redis", x: "right-[2%] top-[12%] sm:right-[2%]" },
   { ref: "node-2", label: "data-tomb", sub: "postgres", x: "right-[2%] bottom-[8%] sm:right-[4%]" },
   { ref: "node-3", label: "cache-layer", sub: "redis", x: "left-[2%] bottom-[14%] sm:left-[4%]" },
 ];
@@ -84,7 +84,7 @@ export function Networking() {
   return (
     <section id="network" className="relative mx-auto w-full max-w-6xl px-4 py-32 md:px-8">
       <div className="mx-auto max-w-6xl px-0">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-15%" }}
@@ -94,7 +94,7 @@ export function Networking() {
           <div className="flex items-baseline justify-between gap-6">
             <h2 className="min-w-0">
               <HyperText
-                text="03 — NETWORK"
+                text="03 â€” NETWORK"
                 className="text-3xl font-bold uppercase tracking-tight text-white md:text-5xl"
               />
             </h2>
@@ -102,22 +102,22 @@ export function Networking() {
               topology
             </span>
           </div>
-        </motion.div>
+        </m.div>
 
-        <motion.p
+        <m.p
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: EASE }}
           className="mt-8 max-w-lg font-mono text-sm leading-relaxed text-neutral-500 md:text-base"
         >
-          The world, wired. Every request travels along the white beams — from
+          The world, wired. Every request travels along the white beams â€” from
           the gateway through the queue to the tomb of data. Move your mouse to
           tilt the globe.
-        </motion.p>
+        </m.p>
       </div>
 
-      <motion.div
+      <m.div
         initial={{ opacity: 0, scale: 0.96 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true, margin: "-10%" }}
@@ -131,15 +131,12 @@ export function Networking() {
           <div className="gothic-grid absolute inset-0 z-0 opacity-60" />
 
           <div className="absolute inset-0 z-[1] flex w-full max-w-full items-center justify-center overflow-hidden px-2 py-6">
-            <div
-              className={`mx-auto flex aspect-square w-full max-w-[320px] items-center justify-center overflow-hidden transition-opacity duration-700 [transform:translateZ(0)] [will-change:transform] sm:max-w-[480px] md:max-w-[600px] ${
-                isLoaderDone ? "opacity-100" : "pointer-events-none opacity-0"
-              }`}
-              aria-hidden={!isLoaderDone}
-            >
-              <ErrorBoundary>
-                <WireframeDottedGlobe globeRef={globeRef} />
-              </ErrorBoundary>
+            <div className="mx-auto flex aspect-square w-full max-w-[320px] items-center justify-center overflow-hidden [contain:layout_paint] [transform:translateZ(0)] [will-change:transform] sm:max-w-[480px] md:max-w-[600px]">
+              {isLoaderDone && (
+                <ErrorBoundary>
+                  <WireframeDottedGlobe globeRef={globeRef} />
+                </ErrorBoundary>
+              )}
             </div>
           </div>
 
@@ -191,7 +188,7 @@ export function Networking() {
               );
             })}
         </div>
-      </motion.div>
+      </m.div>
     </section>
   );
 }

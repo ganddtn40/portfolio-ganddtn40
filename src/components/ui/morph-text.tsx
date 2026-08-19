@@ -1,7 +1,7 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -23,7 +23,7 @@ export function MorphText({ words, className, interval = 2800 }: MorphTextProps)
   return (
     <span className={cn("inline-block", className)}>
       <AnimatePresence mode="wait">
-        <motion.span
+        <m.span
           key={words[index]}
           initial={{ opacity: 0, y: 10, filter: "blur(6px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -32,7 +32,7 @@ export function MorphText({ words, className, interval = 2800 }: MorphTextProps)
           className="inline-block"
         >
           {words[index]}
-        </motion.span>
+        </m.span>
       </AnimatePresence>
     </span>
   );

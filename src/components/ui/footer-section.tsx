@@ -1,7 +1,7 @@
-"use client";
+﻿"use client";
 
 import dynamic from "next/dynamic";
-import { motion, useReducedMotion } from "motion/react";
+import { m, useReducedMotion } from "motion/react";
 import { Frame, Mail } from "lucide-react";
 import { SiGithub } from "react-icons/si";
 import { SITE } from "@/lib/site";
@@ -81,7 +81,7 @@ export function Footer() {
         <AnimatedContainer className="space-y-4">
           <Frame className="size-8" />
           <p className="text-muted-foreground mt-8 text-sm md:mt-0">
-            © 2026 {SITE.name} (lyhsjaa). Built with Next.js.
+            Â© 2026 {SITE.name} (lyhsjaa). Built with Next.js.
           </p>
         </AnimatedContainer>
 
@@ -130,7 +130,7 @@ function AnimatedContainer({
   }
 
   return (
-    <motion.div
+    <m.div
       initial={{ filter: "blur(4px)", translateY: -8, opacity: 0 }}
       whileInView={{ filter: "blur(0px)", translateY: 0, opacity: 1 }}
       viewport={{ once: true }}
@@ -138,6 +138,6 @@ function AnimatedContainer({
       className={className}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }

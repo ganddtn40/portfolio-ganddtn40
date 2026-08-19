@@ -1,7 +1,7 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
-import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
+import { m, useMotionTemplate, useMotionValue } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface MagicCardProps {
@@ -30,7 +30,7 @@ export function MagicCard({ children, className }: MagicCardProps) {
         my.set(-300);
       }}
     >
-      <motion.div
+      <m.div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
         style={{ background: glow }}

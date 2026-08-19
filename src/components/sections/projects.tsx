@@ -1,8 +1,8 @@
-"use client";
+﻿"use client";
 
 import dynamic from "next/dynamic";
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { Code, ExternalLink } from "lucide-react";
 import { BorderBeam } from "@/components/ui/border-beam";
 import { ContainerScroll } from "@/components/ui/container-scroll";
@@ -71,7 +71,7 @@ export function Projects() {
               className="whitespace-nowrap font-mono text-6xl font-bold uppercase text-transparent text-outline md:text-8xl"
             >
               {w}
-              <span className="mx-10 inline-block text-neutral-900">✝</span>
+              <span className="mx-10 inline-block text-neutral-900">âœ</span>
             </span>
           ))}
         </Marquee>
@@ -82,7 +82,7 @@ export function Projects() {
           <ErrorBoundary>
             <Lamp className="absolute -top-32 left-1/2 w-[140vw] max-w-none -translate-x-1/2" />
           </ErrorBoundary>
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-15%" }}
@@ -91,16 +91,16 @@ export function Projects() {
           >
             <div className="flex items-baseline justify-between gap-6">
               <h2 className="font-mono text-3xl font-bold uppercase tracking-tight text-white md:text-5xl">
-                <GlitchText text="02 — projects" />
+                <GlitchText text="02 â€” projects" />
               </h2>
               <span className="hidden shrink-0 font-mono text-xs text-neutral-600 sm:block">
                 one at a time
               </span>
             </div>
-          </motion.div>
+          </m.div>
         </div>
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-10%" }}
@@ -163,13 +163,25 @@ export function Projects() {
               </Magnetic>
             </div>
           </div>
-        </motion.div>
+        </m.div>
       </div>
 
       <div className="relative z-10">
         <ErrorBoundary>
           <ContainerScroll titleComponent={<></>}>
-            <MockupScreen />
+            <div className="flex h-full w-full flex-col overflow-hidden bg-neutral-950 [contain:layout_paint]">
+              <div className="flex h-6 shrink-0 items-center gap-1.5 rounded-t-lg bg-[#1e1e1e] px-3">
+                <span className="h-3 w-3 rounded-full bg-red-500" />
+                <span className="h-3 w-3 rounded-full bg-yellow-500" />
+                <span className="h-3 w-3 rounded-full bg-green-500" />
+                <span className="ml-3 truncate font-mono text-[10px] text-neutral-500">
+                  socialitea — preview
+                </span>
+              </div>
+              <div className="relative flex-1">
+                <MockupScreen />
+              </div>
+            </div>
           </ContainerScroll>
         </ErrorBoundary>
       </div>

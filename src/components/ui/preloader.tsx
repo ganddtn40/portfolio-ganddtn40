@@ -1,8 +1,8 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 
 import { AppleHelloEnglishEffect } from "@/components/ui/apple-hello";
 import { EASE } from "@/lib/easing";
@@ -26,7 +26,9 @@ export function IntroLoader({
 
   useEffect(() => {
     if (!ready) return;
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
   }, [ready]);
 
   useEffect(() => {
@@ -46,13 +48,12 @@ export function IntroLoader({
     <>
       <AnimatePresence onExitComplete={() => setReady(true)}>
         {!exitStarted && (
-          <motion.div
+          <m.div
             className="fixed inset-0 z-[9998] flex flex-col items-center justify-center bg-black"
             exit={{ y: "-100%" }}
             transition={{ duration: 0.9, ease: EASE }}
           >
             <AppleHelloEnglishEffect
-              speed={1.2}
               className="h-16 text-white md:h-24"
               onAnimationComplete={() => setHelloDone(true)}
             />
@@ -65,7 +66,7 @@ export function IntroLoader({
             <div className="absolute bottom-10 left-1/2 -translate-x-1/2 font-mono text-[10px] uppercase tracking-[0.4em] text-neutral-700">
               loading soul
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
       {children}

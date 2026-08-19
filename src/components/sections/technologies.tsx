@@ -1,6 +1,6 @@
-"use client";
+﻿"use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { IconCloud } from "@/components/ui/interactive-icon-cloud";
 import { ErrorBoundary } from "@/components/ui/error-boundary";
 import { HackerText } from "@/components/ui/hacker-text";
@@ -31,7 +31,7 @@ const SKILLS = [
 export function Technologies() {
   return (
     <section id="stack" className="relative mx-auto w-full max-w-6xl px-4 py-32 md:px-8">
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-15%" }}
@@ -41,18 +41,18 @@ export function Technologies() {
         <div className="flex items-baseline justify-between gap-6">
           <h2 className="min-w-0">
             <HyperText
-              text="01 — STACK"
+              text="01 â€” STACK"
               className="text-3xl font-bold uppercase tracking-tight text-white md:text-5xl"
             />
           </h2>
           <span className="hidden shrink-0 font-mono text-xs text-neutral-600 sm:block">
-            <HackerText text="step_01 — the arsenal" />
+            <HackerText text="step_01 â€” the arsenal" />
           </span>
         </div>
-      </motion.div>
+      </m.div>
 
       <div className="mt-16 flex flex-col items-center gap-16">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-10%" }}
@@ -73,19 +73,19 @@ export function Technologies() {
               </li>
             ))}
           </ul>
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-10%" }}
           transition={{ duration: 0.9, delay: 0.1, ease: EASE }}
-          className="relative min-h-[420px] w-full overflow-hidden border-none bg-transparent shadow-none outline-none [transform:translate3d(0,0,0)] [will-change:transform]"
+          className="relative min-h-[420px] w-full overflow-hidden border-none bg-transparent shadow-none outline-none [contain:layout_paint] [transform:translate3d(0,0,0)] [will-change:transform]"
         >
           <ErrorBoundary>
             <IconCloud iconSlugs={ICON_SLUGS} />
           </ErrorBoundary>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

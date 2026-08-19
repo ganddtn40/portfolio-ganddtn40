@@ -1,7 +1,7 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { SiGithub, SiInstagram, SiTiktok } from "react-icons/si";
 import { TextRoll } from "@/components/ui/animated-menu";
 import { SITE } from "@/lib/site";
@@ -182,7 +182,7 @@ export function TerminalNavbar() {
 
       <AnimatePresence initial={false}>
         {isOpen && (
-          <motion.div
+          <m.div
             key="mobile-menu"
             className="sm:hidden flex flex-col items-center w-full overflow-hidden"
             initial={{ height: 0, opacity: 0 }}
@@ -205,7 +205,7 @@ export function TerminalNavbar() {
             <div className="flex flex-col items-center space-y-4 mt-4 w-full pb-2">
               {socialPill}
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </header>

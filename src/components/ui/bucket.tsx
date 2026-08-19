@@ -1,6 +1,6 @@
-"use client";
+﻿"use client";
 
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, m } from "motion/react";
 import { useEffect, useState } from "react";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
@@ -633,7 +633,7 @@ export default function Bucket() {
             <AnimatePresence mode="popLayout">
               {items.map((item, index) =>
                 index !== 0 ? null : (
-                  <motion.div
+                  <m.div
                     key={item.id}
                     initial={{
                       y: isMobile ? -70 : -100,
@@ -672,7 +672,7 @@ export default function Bucket() {
                         {item.description}
                       </span>
                     </div>
-                  </motion.div>
+                  </m.div>
                 ),
               )}
             </AnimatePresence>

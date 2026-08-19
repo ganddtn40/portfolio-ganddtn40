@@ -1,7 +1,7 @@
-"use client";
+﻿"use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 const STAGGER = 0.035;
@@ -12,7 +12,7 @@ export const TextRoll: React.FC<{
   center?: boolean;
 }> = ({ children, className, center = false }) => {
   return (
-    <motion.span
+    <m.span
       initial="initial"
       whileHover="hovered"
       className={cn("relative block overflow-hidden", className)}
@@ -28,7 +28,7 @@ export const TextRoll: React.FC<{
             : STAGGER * i;
 
           return (
-            <motion.span
+            <m.span
               variants={{
                 initial: {
                   y: 0,
@@ -45,7 +45,7 @@ export const TextRoll: React.FC<{
               key={i}
             >
               {l}
-            </motion.span>
+            </m.span>
           );
         })}
       </div>
@@ -58,7 +58,7 @@ export const TextRoll: React.FC<{
             : STAGGER * i;
 
           return (
-            <motion.span
+            <m.span
               variants={{
                 initial: {
                   y: "100%",
@@ -75,10 +75,10 @@ export const TextRoll: React.FC<{
               key={i}
             >
               {l}
-            </motion.span>
+            </m.span>
           );
         })}
       </div>
-    </motion.span>
+    </m.span>
   );
 };
