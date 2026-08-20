@@ -1,10 +1,10 @@
-# Portfolio Saya - Full Stack Web Developer
+# Lyhhsjaa Portfolio - Full Stack Web Developer
 
-A brutalist, gothic, and highly interactive terminal-style web portfolio built with Next.js, Tailwind CSS, Framer Motion, and GSAP.
+A brutalist, and highly interactive terminal-style web portfolio built with Next.js, Tailwind CSS, Framer Motion, and GSAP.
 
 ## About
 
-Portfolio Saya - Full Stack Web Developer dari Indonesia, spesialis TypeScript, Next.js, PHP, SQL, dan Dart. Terminal-first, gothic aesthetic — every section behaves like a session in a command line: `whoami`, `cat info.txt`, `./github_contributions.sh`, and a live "socialitea" project demo.
+Lyhsjaa - Full Stack Web Developer dari Indonesia, spesialis TypeScript, Next.js, PHP, SQL, dan Dart. Terminal-first, gothic aesthetic — every section behaves like a session in a command line: `whoami`, `cat info.txt`, `./github_contributions.sh`, and a live "socialitea" project demo.
 
 ## Tech Stack
 
@@ -63,4 +63,4 @@ vercel
 
 ## License
 
-All rights reserved. This repository is a personal portfolio — content, layout, and code are owned by ganddtn40 and may not be reused without permission.
+All rights reserved. This repository is a personal portfolio — content, layout, and code are owned by lyhhsjaa and may not be reused without permission.
